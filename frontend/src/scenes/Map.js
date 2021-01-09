@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from "styled-components";
 import axios from "axios";
+import Switch from 'react-switch';
 import { compose, withProps, lifecycle, withStateHandlers } from "recompose";
 import { 
     GoogleMap, 
@@ -21,7 +22,7 @@ const Map = compose(
     withProps({
       googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
       loadingElement: <div style={{ height: `100%` }} />,
-      containerElement: <div style={{ padding: '150px', height: `600px`, width: `600px` }} />,
+      containerElement: <div style={{ padding: '0 150px 150px 150px', margin: 'auto', height: `600px`, width: `600px` }} />,
       mapElement: <div style={{ height: `100%` }} />,
     }),
     withStateHandlers(() => ({
@@ -36,6 +37,13 @@ const Map = compose(
       }), {
         onDarkSelect: ({ darkSelected }) => (dark) => ({
           darkSelected: dark
+        })
+      }),
+      withStateHandlers(() => ({
+        isOpen: true,
+      }), {
+        onOpen: ({ isOpen }) => () => ({
+          isOpen: !isOpen
         })
       }),
     withScriptjs,
@@ -65,6 +73,7 @@ const Map = compose(
             origin: new google.maps.LatLng(44.3148, -85.6024),
             destination: new google.maps.LatLng(45.289722, -80.143889),
             travelMode: google.maps.TravelMode.DRIVING,
+            provideRouteAlternatives: true,
             waypoints: [
                 {
                    location: new google.maps.LatLng(44.991, -74.74)
@@ -75,6 +84,7 @@ const Map = compose(
               this.setState({
                 directions: result,
               });
+              console.log(result);
             } else {
               console.error(`error fetching directions ${result}`);
             }
@@ -89,13 +99,25 @@ const Map = compose(
     hazardSelected,
     onHazardSelect,
     darkSelected,
-    onDarkSelect
+    onDarkSelect,
+    isOpen,
+    onOpen
 }) =>
+    <Wrapper>
+        <Container>
+            <p> Control smart features </p>
+            <label style={{ margin: '0 10px' }}> On</label>
+            <Switch
+                checked={isOpen}
+                onChange={onOpen}
+            />
+            <label style={{ margin: '0 10px'}}> Off</label>
+    </Container>
     <GoogleMap
         defaultZoom={4.5}
         defaultCenter={center}
     >
-        {!!darkSpots && darkSpots.map((darkSpot) => (
+        {!!darkSpots && !!isOpen && darkSpots.map((darkSpot) => (
             <Marker
                 key={`${darkSpot.lat}-${darkSpot.lon}`}
                 position={{ lat: parseFloat(darkSpot.lat), lng: parseFloat(darkSpot.lon) }}
@@ -108,7 +130,7 @@ const Map = compose(
                 onClick={() => onDarkSelect(darkSpot)}
             />
         ))}
-        {!!hazards && hazards.map((hazard) => (
+        {!!hazards && !!isOpen && hazards.map((hazard) => (
             <Marker
                 key={`${hazard.lat}-${hazard.lon}`}
                 position={{ lat: parseFloat(hazard.lat), lng: parseFloat(hazard.lon) }}
@@ -121,7 +143,7 @@ const Map = compose(
                 onClick={() => onHazardSelect(hazard)}
             />
         ))}
-        {darkSelected ? (
+        {!!isOpen && darkSelected ? (
             <InfoWindow position={{ lat: parseFloat(darkSelected.lat), lng: parseFloat(darkSelected.lon) }}>
                 <div> 
                     <p>City: {darkSelected.city} </p>
@@ -131,7 +153,7 @@ const Map = compose(
                 </div>
             </InfoWindow>
         ) : null}
-        {hazardSelected ? (
+        {!!isOpen && hazardSelected ? (
             <InfoWindow position={{ lat: parseFloat(hazardSelected.lat), lng: parseFloat(hazardSelected.lon) }}>
                 <div> 
                     <p>City: {hazardSelected.city} </p>
@@ -147,11 +169,16 @@ const Map = compose(
             />
         )}
     </GoogleMap>
+    </Wrapper>
 );
 
 const Wrapper = styled.div`
     display: flex;
-    justify-content: center;
-    padding-bottom: 50px;
+    flex-direction: column-reverse;
+
+`;
+const Container = styled.div`
+    text-align: center; 
+    margin-top: 20px;
 `;
 export default React.memo(Map);
