@@ -10,17 +10,26 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+from pathlib import Path
 import os
+import os.path
+from dotenv import load_dotenv
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv()
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&f0tmf$1%78g73o9qzh5b3+7n_szd-tijnvsffq-3!30bb1(-9'
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
+DB_PASSWORD = str(os.getenv('DB_PASSWORD'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,8 +89,13 @@ WSGI_APPLICATION = 'bridgeit.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'tmbmnvic',
+        'USER': 'tmbmnvic',
+        'PASSWORD': DB_PASSWORD,
+        'HOST': 'otto.db.elephantsql.com',
+        'PORT': '5432',
+        'CONN_MAX_AGE': 1
     }
 }
 
