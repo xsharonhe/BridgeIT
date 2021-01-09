@@ -2,8 +2,8 @@ import 'styled-components';
 
 export const baseTheme = {
     font: {
-        header: '"aktiv-grotesk-condensed", sans-serif',
-        caption: '"soleil", sans-serif',
+        header: '"gill-sans-nova", sans-serif',
+        caption: '"fira-mono", sans-serif',
     },
     size: {
         default: '1rem',
@@ -11,7 +11,7 @@ export const baseTheme = {
         h1: '2rem',
         h2: '1.75rem',
         h3: '1.3rem',
-        defaultLarger: '1.2rem',
+        defaultLarger: '1.5rem',
         large: '2.5rem',
     },
     radius: {

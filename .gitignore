@@ -3,6 +3,7 @@
 # Django
 venv
 _pycache_
+data
 
 # React dependencies
 *node_modules
