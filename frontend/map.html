@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Distance Calculation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="map.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="floating-panel">
+        <div class="container-fluid">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <p for="from" class="col-xs-2">From:</p>
+                    <div class="col-xs-10">
+                        <input type="text" id="from" placeholder="Donation Center" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p for="to" class="col-xs-2 control-label">To:</p>
+                    <div class="col-xs-10">
+                        <input type="text" id="to" placeholder="Remote Community" class="form-control">
+                    </div>
+                </div>
+            </form>
+
+            <div class="col-xs-offset-2 col-xs-10">
+                <button class="btn btn-info btn-lg" onclick="calcRoute();">Submit</button>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div id="googleMap"></div>
+            <div id="output">
+            </div>
+        </div>
+    </div>
+    <div id="right-panel"></div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMMGzOjMr-Iud3YX1cnL24Pbdrq6wwfA0&libraries=places"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="Scripts/jquery-3.1.1.min.js"></script>
+    <script src="map.js"></script>
+</body>
+
+</html>
