@@ -5,7 +5,7 @@ from . import views
 app_name = 'mobility'
 
 urlpatterns = [
-    path('ml',
+    path('ml/',
          views.MLView.as_view())
 ]
 

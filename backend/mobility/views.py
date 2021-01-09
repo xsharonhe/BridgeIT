@@ -547,6 +547,388 @@ class MLView(APIView):
                     "weekday": 0, # 1 being is weekday
                     "hours": cornwall_6_end[0]
                 })
+        biggest = []
+        sorted_list = sorted_list[::-1]
+        for i in range(0, 1):
+            if(fort_erie_4_day == sorted_list[i]):
+                biggest.append({
+                "location": "Fort Erie",
+                "lat": 42.907,
+                "lon": -78.906,
+                "hour": 23,
+                "weekday": 1, # 1 being is weekday
+                "hours": fort_erie_4_day[0]
+            })
+            elif(fort_erie_4_end == sorted_list[i]):
+                biggest.append({
+                    "location": "Fort Erie",
+                    "lat": 42.907,
+                    "lon": -78.906,
+                    "hour": 23,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": fort_erie_4_end[0]
+                })
+            elif(fort_erie_5_day == sorted_list[i]):
+                biggest.append({
+                    "location": "Fort Erie",
+                    "lat": 42.907,
+                    "lon": -78.906,
+                    "hour": 0,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": fort_erie_5_day[0]
+                })
+            elif(fort_erie_5_end == sorted_list[i]):
+                biggest.append({
+                    "location": "Fort Erie",
+                    "lat": 42.907,
+                    "lon": -78.906,
+                    "hour": 0,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": fort_erie_5_end[0]
+                })
+            elif(fort_erie_6_day == sorted_list[i]):
+                biggest.append({
+                    "location": "Fort Erie",
+                    "lat": 42.907,
+                    "lon": -78.906,
+                    "hour": 1,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": fort_erie_5_end[0]
+                })
+            elif(fort_erie_6_end == sorted_list[i]):
+                biggest.append({
+                    "location": "Fort Erie",
+                    "lat": 42.907,
+                    "lon": -78.906,
+                    "hour": 1,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": fort_erie_5_end[0]
+                })
+            elif(lansdowne_4_day == sorted_list[i]):
+                biggest.append({
+                    "location": "Lansdowne",
+                    "lat": 44.347,
+                    "lon": -75.983,
+                    "hour": 23,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": lansdowne_4_day[0]
+                })
+            elif(lansdowne_4_end == sorted_list[i]):
+                    biggest.append({
+                    "location": "Lansdowne",
+                    "lat": 44.347,
+                    "lon": -75.983,
+                    "hour": 23,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": lansdowne_4_end[0]
+                })
+            elif(lansdowne_5_day == sorted_list[i]):
+                    biggest.append({
+                    "location": "Lansdowne",
+                    "lat": 44.347,
+                    "lon": -75.983,
+                    "hour": 0,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": lansdowne_5_day[0]
+                })
+            elif(lansdowne_5_end == sorted_list[i]):
+                biggest.append({
+                    "location": "Lansdowne",
+                    "lat": 44.347,
+                    "lon": -75.983,
+                    "hour": 0,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": lansdowne_5_end[0]
+                })
+            elif(lansdowne_6_day == sorted_list[i]):
+                biggest.append({
+                    "location": "Lansdowne",
+                    "lat": 44.347,
+                    "lon": -75.983,
+                    "hour": 1,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": lansdowne_6_day[0]
+                })
+            elif(lansdowne_6_end == sorted_list[i]):
+               biggest.append({
+                    "location": "Lansdowne",
+                    "lat": 44.347,
+                    "lon": -75.983,
+                    "hour": 1,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": lansdowne_6_end[0]
+                })
+            elif(prescott_4_day == sorted_list[i]):
+                biggest.append({
+                    "location": "Prescott",
+                    "lat": 44.733,
+                    "lon": -75.458,
+                    "hour": 23,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": prescott_4_day[0]
+                })
+            elif(prescott_4_end == sorted_list[i]):
+                    biggest.append({
+                    "location": "Prescott",
+                    "lat": 44.733,
+                    "lon": -75.458,
+                    "hour": 23,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": prescott_4_end[0]
+                })
+            elif(prescott_5_day == sorted_list[i]):
+                    biggest.append({
+                    "location": "Prescott",
+                    "lat": 44.733,
+                    "lon": -75.458,
+                    "hour": 0,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": prescott_5_day[0]
+                })
+            elif(prescott_5_end == sorted_list[i]):
+                    biggest.append({
+                    "location": "Prescott",
+                    "lat": 44.733,
+                    "lon": -75.458,
+                    "hour": 0,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": prescott_5_end[0]
+                })
+            elif(prescott_6_day == sorted_list[i]):
+                    biggest.append({
+                    "location": "Prescott",
+                    "lat": 44.733,
+                    "lon": -75.458,
+                    "hour": 1,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": prescott_6_day[0]
+                })
+            elif(prescott_6_end == sorted_list[i]):
+                    biggest.append({
+                    "location": "Prescott",
+                    "lat": 44.733,
+                    "lon": -75.458,
+                    "hour": 1,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": prescott_6_end[0]
+            })
+            elif(queenston_4_day == sorted_list[i]):
+                biggest.append({
+                    "location": "Queenston",
+                    "lat": 43.153,
+                    "lon": -79.044,
+                    "hour": 23,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": queenston_4_day[0]
+                })
+            elif(queenston_4_end == sorted_list[i]):
+                biggest.append({
+                    "location": "Queenston",
+                    "lat": 43.153,
+                    "lon": -79.044,
+                    "hour": 23,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": queenston_4_end[0]
+                    })
+            elif(queenston_5_day == sorted_list[i]):
+                biggest.append({
+                    "location": "Queenston",
+                    "lat": 43.153,
+                    "lon": -79.044,
+                    "hour": 0,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": queenston_5_day[0]
+                    })
+            elif(queenston_5_end == sorted_list[i]):
+                biggest.append({
+                    "location": "Queenston",
+                    "lat": 43.153,
+                    "lon": -79.044,
+                    "hour": 0,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": queenston_5_end[0]
+                    })
+            elif(queenston_6_day == sorted_list[i]):
+                biggest.append({
+                    "location": "Queenston",
+                    "lat": 43.153,
+                    "lon": -79.044,
+                    "hour": 1,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": queenston_6_day[0]
+                    })
+            elif(queenston_6_end == sorted_list[i]):
+                biggest.append({
+                "location": "Queenston",
+                "lat": 43.153,
+                "lon": -79.044,
+                "hour": 1,
+                "weekday": 0, # 1 being is weekday
+                "hours": queenston_6_end[0]
+                })
+            elif(sarnia_4_day == sorted_list[i]):
+                biggest.append({
+                    "location": "Sarnia",
+                    "lat": 42.999,
+                    "lon": -82.423,
+                    "hour": 23,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": sarnia_4_day[0]
+                })
+            elif(sarnia_4_end == sorted_list[i]):
+                biggest.append({
+                    "location": "Sarnia",
+                    "lat": 42.999,
+                    "lon": -82.423,
+                    "hour": 23,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": sarnia_4_end[0]
+                })
+            elif(sarnia_5_day == sorted_list[i]):
+                biggest.append({
+                    "location": "Sarnia",
+                    "lat": 42.999,
+                    "lon": -82.423,
+                    "hour": 0,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": sarnia_5_day[0]
+                })    
+            elif(sarnia_5_end == sorted_list[i]):
+                biggest.append({
+                    "location": "Sarnia",
+                    "lat": 42.999,
+                    "lon": -82.423,
+                    "hour": 0,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": sarnia_5_end[0]
+                })  
+            elif(sarnia_6_day == sorted_list[i]):
+                biggest.append({
+                    "location": "Sarnia",
+                    "lat": 42.999,
+                    "lon": -82.423,
+                    "hour": 1,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": sarnia_6_day[0]
+                })
+            elif(sarnia_6_end == sorted_list[i]):
+                biggest.append({
+                    "location": "Sarnia",
+                    "lat": 42.999,
+                    "lon": -82.423,
+                    "hour": 1,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": sarnia_6_end[0]
+                })
+            elif(windsor_4_day == sorted_list[i]):
+                biggest.append({
+                    "location": "Windsor - Ambassador Bridge",
+                    "lat": 42.312,
+                    "lon": -83.074,
+                    "hour": 23,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": windsor_4_day[0]
+                })
+            elif(windsor_4_end == sorted_list[i]):
+                biggest.append({
+                    "location": "Windsor - Ambassador Bridge",
+                    "lat": 42.312,
+                    "lon": -83.074,
+                    "hour": 23,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": windsor_4_end[0]
+                })
+            elif(windsor_5_day == sorted_list[i]):
+               biggest.append({
+                    "location": "Windsor - Ambassador Bridge",
+                    "lat": 42.312,
+                    "lon": -83.074,
+                    "hour": 0,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": windsor_5_day[0]
+                }) 
+            elif(windsor_5_end == sorted_list[i]):
+                   biggest.append({
+                    "location": "Windsor - Ambassador Bridge",
+                    "lat": 42.312,
+                    "lon": -83.074,
+                    "hour": 0,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": windsor_5_end[0]
+                }) 
+            elif(windsor_6_day == sorted_list[i]):
+                   biggest.append({
+                    "location": "Windsor - Ambassador Bridge",
+                    "lat": 42.312,
+                    "lon": -83.074,
+                    "hour": 1,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": windsor_6_day[0]
+                }) 
+            elif(windsor_6_end == sorted_list[i]):
+                   biggest.append({
+                    "location": "Windsor - Ambassador Bridge",
+                    "lat": 42.312,
+                    "lon": -83.074,
+                    "hour": 1,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": windsor_6_end[0]
+                }) 
+            elif(cornwall_4_day == sorted_list[i]):
+                biggest.append({
+                    "location": "Cornwall",
+                    "lat": 44.991,
+                    "lon": -74.74,
+                    "hour": 23,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": cornwall_4_day[0]
+                })
+            elif(cornwall_4_end == sorted_list[i]):
+                biggest.append({
+                    "location": "Cornwall",
+                    "lat": 44.991,
+                    "lon": -74.74,
+                    "hour": 23,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": cornwall_4_end[0]
+                })
+            elif(cornwall_5_day == sorted_list[i]):
+                    biggest.append({
+                    "location": "Cornwall",
+                    "lat": 44.991,
+                    "lon": -74.74,
+                    "hour": 0,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": cornwall_5_day[0]
+                })
+            elif(cornwall_5_end == sorted_list[i]):
+                    biggest.append({
+                    "location": "Cornwall",
+                    "lat": 44.991,
+                    "lon": -74.74,
+                    "hour": 0,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": cornwall_5_end[0]
+                })
+            elif(cornwall_6_day == sorted_list[i]):
+                    biggest.append({
+                    "location": "Cornwall",
+                    "lat": 44.991,
+                    "lon": -74.74,
+                    "hour": 1,
+                    "weekday": 1, # 1 being is weekday
+                    "hours": cornwall_6_day[0]
+                })
+            elif(cornwall_6_end == sorted_list[i]):
+                    biggest.append({
+                    "location": "Cornwall",
+                    "lat": 44.991,
+                    "lon": -74.74,
+                    "hour": 1,
+                    "weekday": 0, # 1 being is weekday
+                    "hours": cornwall_6_end[0]
+                })
         return Response({
-            "query": smallest
+            "query": smallest,
+            "biggest": biggest
         })
