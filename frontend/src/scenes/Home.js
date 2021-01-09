@@ -11,16 +11,20 @@ import Carousel from "../components/Containers/Carousel";
 const Home = () => {
   const notesList = [
     {
-      caption: "Reason 1",
-      text: "And here are a few words!",
-      icon: <UserFriends />,
-    },
-    {
-      caption: "Reason 2",
-      text: "And here are a few words!",
+      caption: "Restart",
+      text: "Bringing new hope to remote communities in need of depleting medical supplies",
       icon: <HandHoldingMedical />,
     },
-    { caption: "Reason 3", text: "And here are a few words!", icon: <Truck /> },
+    {
+      caption: "Repurpose",
+      text: "Redirect unused necessities towards areas in need",
+      icon: <Truck />
+      ,
+    },
+    { caption: "Reunite", text: "Build connections between donor and donee to ease the matching and delivery process", 
+      
+      icon: <UserFriends />
+    },
   ];
 
   const quickNotes = notesList.map((note) => {
@@ -62,14 +66,30 @@ const Home = () => {
     <HomePage>
       <DivHead>TODO: Main Motto</DivHead>
       <DivLinks>{quickNotes}</DivLinks>
-      <Container bgColor="primary" color="background">
-        Short About Section
-      </Container>
+      <SContainer bgColor="primary" color="background" font-size="20px">
+      <p>Amidst the global pandemic, many remote communities are being neglected and are in dire need of 
+      various medical supplies. At BridgeIT, we strive to provide a user-friendly platform that allows 
+      medical organizations to easily view and support the specific medical needs of remote communities nearby. </p>
+
+      <p>Medical organizations often have a surplus of products that are not used and left until expiration. Instead 
+      of leaving these products unused, they can be redirected to people in nearby remote communities. </p>
+
+      <p>Through BridgeIT, we are able to provide a voice for people in these areas so that donors and suppliers 
+      who have the desired products can hear them and provide support to those who need it most. In addition, our ‘Group Order’ 
+      feature allows a more efficient way for communities within a common area to receive the most supplies in the least amount 
+      of time possible. </p>
+
+      </SContainer>
       <Container>{faqsList}</Container>
       <Carousel />
     </HomePage>
   );
 };
+
+const SContainer = styled(Container)`
+  text-align: center;
+  font-size: 25px;
+`;
 
 const HomePage = styled.div`
   margin: 2% 0;
