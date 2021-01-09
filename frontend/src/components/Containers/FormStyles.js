@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Text, Input, Button } from "../";
+import { Text, Button } from "../";
 
 export const FormPage = styled.div``;
 
