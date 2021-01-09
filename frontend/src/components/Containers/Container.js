@@ -10,7 +10,7 @@ export const Container = ({children, ...props}) => {
 
 const SDiv = styled.div`
     ${({theme, ...props}) => `
-        padding: 5% 10%;
+        padding: 3% 10%;
         background-color: ${theme.colors[props.bgColor] || theme.colors.background};
         color: ${theme.colors[props.color] || theme.colors.text};
     `}

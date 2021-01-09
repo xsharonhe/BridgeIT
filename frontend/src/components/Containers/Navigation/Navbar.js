@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <NavWrapper>
       <Link to="/">
-        <Brand>BridgeIT</Brand>
+        <Brand>Bridge<StyledSpan>IT</StyledSpan></Brand>
       </Link>
       <SUl style={{ float: "right" }}>{navbarLinks}</SUl>
     </NavWrapper>
@@ -68,6 +68,12 @@ const SLi = styled.li`
         &.active {
             font-weight: 700;
         }
+    `}
+`;
+
+const StyledSpan = styled.span`
+  ${({ theme }) => `
+  color: ${theme.colors.accent};
     `}
 `;
 

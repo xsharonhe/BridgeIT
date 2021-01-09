@@ -60,7 +60,7 @@ export const baseTheme = {
     colors: {
         primary: '#0f2f24',
         secondary: '#2d4d42',
-        background: '#ded6d4',
+        background: '#efefef',
         accent: '#d7385e',
         text: '#393E46',
         hover: '#718878',
