@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from "styled-components";
 import axios from "axios";
-import { compose, withProps, lifecycle, withStateHandlers, withState } from "recompose";
+import { compose, withProps, lifecycle, withStateHandlers } from "recompose";
 import { 
     GoogleMap, 
     Marker,
