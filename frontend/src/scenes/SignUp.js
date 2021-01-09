@@ -13,12 +13,11 @@ import {
 
 class SignUp extends React.Component {
   state = {
-    firstname: "",
-    lastname: "",
+    group_name: "",
     username: "",
     password: "",
-    verifyPassword: "",
-    userType: "",
+    verify_password: "",
+    user_type: "",
   };
 
   handleChange = (e) => {
@@ -30,7 +29,7 @@ class SignUp extends React.Component {
 
   handleRadio = (e) => {
     this.setState({
-      userType: e.target.name,
+      user_type: e.target.name,
     });
   };
 
@@ -38,8 +37,7 @@ class SignUp extends React.Component {
     e.preventDefault();
 
     if (
-      this.state.firstname === "" ||
-      this.state.lastname === "" ||
+      this.state.group_name === "" ||
       this.state.username === "" ||
       this.state.password === "" ||
       this.state.verifyPassword === ""
@@ -61,21 +59,11 @@ class SignUp extends React.Component {
           <FormText>Sign Up</FormText>
           <SForm>
             <Input
-              name="firstname"
+              name="group_name"
               type="text"
               align="center"
-              placeholder="First Name"
-              value={this.state.firstname}
-              onChange={this.handleChange}
-              style={{ width: "85%", marginBottom: "8%" }}
-              required
-            />
-            <Input
-              name="lastname"
-              type="text"
-              align="center"
-              placeholder="Last Name"
-              value={this.state.lastname}
+              placeholder="Group Name"
+              value={this.state.group_name}
               onChange={this.handleChange}
               style={{ width: "85%", marginBottom: "8%" }}
               required
@@ -122,8 +110,8 @@ class SignUp extends React.Component {
               <br />
               <input
                 type="radio"
-                id="community"
-                name="community"
+                id="receiver"
+                name="receiver"
                 onChange={this.handleRadio}
               />
               <label htmlFor="community">Seeking supplies</label>
