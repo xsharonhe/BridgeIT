@@ -28,14 +28,16 @@ class SignUpView(APIView):
                 else:
                     # Create user
                     user = User.objects.create_user(username=username, password=password)
-                    user.save()
 
-                    user = User.objects.get(username=username)
+                    user = User.objects.get(id=user.id)
+                    print(user)
 
                     # Create user profile
-                    user_profile = UserProfile(user=user, group_name=group_name, phone=phone, address=address, user_type=user_type)
-                    user_profile.save()
+                    user_profile = UserProfile.objects.create(user=user, group_name=group_name, phone=phone, address=address, user_type=user_type)
+
+                    # user_profile.save()
 
                     return Response({'success': 'User account created'})
+                    # return Response(user_profile)
         else:
             return Response({ 'error': 'Passwords do not match' })

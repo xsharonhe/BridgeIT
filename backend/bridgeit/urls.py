@@ -10,7 +10,7 @@ urlpatterns = [
     path('api/v1/', include('darkspots.urls')),
     path('api/v1/', include('geotabs.urls')),
     path('api/v1/', include('mobility.urls')),
-    path('api/vi/accounts/', include('accounts.urls')),
-    path('api/vi/profile/', include('user_profile.urls')),
+    path('api/v1/accounts/', include('accounts.urls')),
+    path('api/v1/profile/', include('user_profile.urls')),
     path('api/v1/items/', include('items.urls')),
 ]
