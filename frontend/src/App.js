@@ -13,6 +13,7 @@ import SignUp from "./scenes/SignUp";
 
 import BorderRouteOptions from "./scenes/BorderRouteOptions";
 import Dashboard from "./scenes/Dashboard";
+import Map from "./scenes/Map";
 
 const App = () => {
   const routes = (
@@ -22,6 +23,7 @@ const App = () => {
       <Route path="/signup" component={SignUp} />
       <Route path='/route_options' component={BorderRouteOptions} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/map" component={Map} />
     </Switch>
   );
 
