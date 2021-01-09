@@ -7,7 +7,7 @@ class DarkSpots(models.Model):
     lon = models.DecimalField(max_digits=10, decimal_places=4)
     city = models.CharField(max_length=50)
     avg_drops = models.DecimalField(max_digits=10, decimal_places=4)
-    percent_affected = models.IntegerField()
+    percent_affected = models.DecimalField(max_digits=10, decimal_places=4)
     
     class Meta:
         ordering = ('-percent_affected', '-avg_drops')
