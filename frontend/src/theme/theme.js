@@ -11,7 +11,7 @@ export const baseTheme = {
         h1: '2rem',
         h2: '1.75rem',
         h3: '1.3rem',
-        defaultLarger: '1.2rem',
+        defaultLarger: '1.5rem',
         large: '2.5rem',
     },
     radius: {
