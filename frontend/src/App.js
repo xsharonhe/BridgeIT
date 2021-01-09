@@ -3,7 +3,8 @@ import { ThemeProvider } from "styled-components";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { baseTheme } from "./theme/theme";
 import { GlobalStyle } from "./theme/GlobalStyle";
-import { Home } from './scenes';
+
+import Home from './scenes/Home';
 
 const App = () => {
   const routes = (
