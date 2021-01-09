@@ -21,7 +21,7 @@ const Navbar = () => {
 
   const navbarLinks = links.map((link) => {
     return (
-      <NavLink to={link.link}>
+      <NavLink key={link.name} to={link.link}>
         <SLi>{link.name}</SLi>
       </NavLink>
     );
