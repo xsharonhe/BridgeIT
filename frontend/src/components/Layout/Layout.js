@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-// TODO:
 import Navbar from '../Containers/Navigation/Navbar';
 import Footer from '../Containers/Navigation/Footer';
 
@@ -20,15 +19,6 @@ const LayoutWrapper = styled.div`
     min-height: 100vh;
 `;
 
-const Page = styled.main`
-    // margin: 2% 10%;
-`;
-
-const SDiv = styled.div`
-    height: 100px;
-    background-color: grey;
-    color: white;
-    margin: auto
-`;
+const Page = styled.main``;
 
 export default Layout;

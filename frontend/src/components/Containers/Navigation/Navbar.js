@@ -11,13 +11,13 @@ const Navbar = () => {
   ];
   const signedOut = [
     { name: "Home", link: "/" },
-    { name: "Sign Up", link: "/" },
-    { name: "Sign In", link: "/" },
+    { name: "Sign Up", link: "/signup" },
+    { name: "Sign In", link: "/signin" },
   ];
 
   let links;
 
-  links = signedIn; //TODO: change links on auth status
+  links = signedOut; //TODO: change links on auth status
 
   const navbarLinks = links.map((link) => {
     return (

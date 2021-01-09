@@ -8,11 +8,15 @@ import store from "./store/store";
 
 import Layout from "./components/Layout/Layout";
 import Home from "./scenes/Home";
+import SignIn from "./scenes/SignIn";
+import SignUp from "./scenes/SignUp";
 
 const App = () => {
   const routes = (
     <Switch>
       <Route exact path="/" component={Home} />
+      <Route path="/signin" component={SignIn} />
+      <Route path="/signup" component={SignUp} />
     </Switch>
   );
 
