@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Slider from "infinite-react-carousel";
-import { Container, Text } from '../';
+import { Text } from '../';
 
 export default class Carousel extends Component {
   render() {
