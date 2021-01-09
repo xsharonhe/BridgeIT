@@ -10,6 +10,7 @@ import Layout from "./components/Layout/Layout";
 import Home from "./scenes/Home";
 import SignIn from "./scenes/SignIn";
 import SignUp from "./scenes/SignUp";
+import Dashboard from "./scenes/Dashboard";
 
 const App = () => {
   const routes = (
@@ -17,6 +18,7 @@ const App = () => {
       <Route exact path="/" component={Home} />
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
+      <Route path="/dashboard" component={Dashboard} />
     </Switch>
   );
 
