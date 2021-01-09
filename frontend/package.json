@@ -6,6 +6,7 @@
     "@react-google-maps/api": "^2.1.0",
     "@styled-icons/boxicons-regular": "^10.23.0",
     "@styled-icons/fa-solid": "^10.23.0",
+    "@styled-icons/material": "^10.23.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
