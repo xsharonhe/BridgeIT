@@ -73,6 +73,9 @@ const Home = () => {
 
 const HomePage = styled.div`
   margin: 2% 0;
+  ${({ theme }) => `
+      font-family: ${theme.font.body};
+  `};
 `;
 
 const DivHead = styled.div`

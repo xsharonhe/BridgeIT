@@ -2,8 +2,8 @@ import 'styled-components';
 
 export const baseTheme = {
     font: {
-        header: '"gill-sans-nova", sans-serif',
-        caption: '"fira-mono", sans-serif',
+        header: 'gill-sans-nova, sans-serif',
+        body: 'neue-haas-unica, sans-serif',
     },
     size: {
         default: '1rem',
