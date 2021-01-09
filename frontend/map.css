@@ -30,6 +30,12 @@ body {
     margin: 20px auto;
 }
 
+#distance {
+    text-align: center;
+    font-size: 2em;
+    margin: 20px auto;
+}
+
 #floating-panel {
     position: absolute;
     top: 50px;
