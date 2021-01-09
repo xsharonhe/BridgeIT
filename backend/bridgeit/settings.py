@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'geotabs.apps.GeotabsConfig',
     'darkspots.apps.DarkspotsConfig',
-    'mobility.apps.MobilityConfig'
+    'mobility.apps.MobilityConfig',
+    'items'
 ]
 
 MIDDLEWARE = [
