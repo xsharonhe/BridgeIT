@@ -1,15 +1,24 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
+# Django
+venv
+_pycache_
+
+# React dependencies
+*node_modules
 /.pnp
 .pnp.js
+.vscode
+.idea
+.env
+*__pycache__
 
 # testing
 /coverage
 
 # production
-/build
+backend/build
+frontent/build
 
 # misc
 .DS_Store
@@ -17,7 +26,16 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.eslintcache
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#virtualenv
+myenv
+Pipfile
+
+# jupyter
+*.ipynb
+*.ipynb_checkpoints
