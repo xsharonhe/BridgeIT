@@ -2,15 +2,15 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import HazardousSerializer
-from .models import Hazardous
+from .serializers import DarkSpotsSerializer
+from .models import DarkSpots
 
 # Create your views here.
-class HazardsView(APIView):
+class DarkSpotsView(APIView):
     def get(self, request, format=None):
         try:
-            hazards = Hazardous.objects.all().order_by('-severity_score')
-            serializer = HazardousSerializer(hazards, many=True)
+            darkspots = DarkSpots.objects.all().order_by('-percent_affected')
+            serializer = DarkSpotsSerializer(darkspots, many=True)
             return Response(serializer.data)
-        except Hazardous.DoesNotExist:
+        except DarkSpots.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)

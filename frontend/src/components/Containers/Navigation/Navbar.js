@@ -11,17 +11,17 @@ const Navbar = () => {
   ];
   const signedOut = [
     { name: "Home", link: "/" },
-    { name: "Sign Up", link: "/" },
-    { name: "Sign In", link: "/" },
+    { name: "Sign Up", link: "/signup" },
+    { name: "Sign In", link: "/signin" },
   ];
 
   let links;
 
-  links = signedIn; //TODO: change links on auth status
+  links = signedOut; //TODO: change links on auth status
 
   const navbarLinks = links.map((link) => {
     return (
-      <NavLink to={link.link}>
+      <NavLink key={link.name} to={link.link}>
         <SLi>{link.name}</SLi>
       </NavLink>
     );
@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <NavWrapper>
       <Link to="/">
-        <Brand>BridgeIT</Brand>
+        <Brand>Bridge<StyledSpan>IT</StyledSpan></Brand>
       </Link>
       <SUl style={{ float: "right" }}>{navbarLinks}</SUl>
     </NavWrapper>
@@ -68,6 +68,12 @@ const SLi = styled.li`
         &.active {
             font-weight: 700;
         }
+    `}
+`;
+
+const StyledSpan = styled.span`
+  ${({ theme }) => `
+  color: ${theme.colors.accent};
     `}
 `;
 

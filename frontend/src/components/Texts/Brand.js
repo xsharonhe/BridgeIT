@@ -12,5 +12,9 @@ const SText = styled.h1`
     font-weight: bold;
     margin: 0;
     padding: 0;
+
+    span {
+      color: ${theme.colors.accent};
+    }
     `}
 `;
