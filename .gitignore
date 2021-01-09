@@ -7,7 +7,7 @@ data
 
 # React dependencies
 *node_modules
-# *index.html
+frontend/public/index.html
 /.pnp
 .pnp.js
 .vscode
