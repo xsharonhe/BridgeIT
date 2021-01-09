@@ -58,14 +58,13 @@ export const baseTheme = {
         `  
     },
     colors: {
-        primary: '#14274e',
-        secondary: '#F0F5FF',
-        background: '#FFFFFF',
-        accent: '#FF9595',
+        primary: '#0f2f24',
+        secondary: '#2d4d42',
+        background: '#ded6d4',
+        accent: '#d7385e',
         text: '#393E46',
-        caption: '#9ba4b4',
-        hover: '#394867',
-        primaryO: 'rgba(37, 46, 86, 0.1)',
+        hover: '#718878',
+        primaryO: 'rgba(15,47,36,0.1)',
         success: '#61b15a',
         error: '#ff4646'
     },
