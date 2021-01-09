@@ -9,7 +9,7 @@ from .models import DarkSpots
 class DarkSpotsView(APIView):
     def get(self, request, format=None):
         try:
-            darkspots = DarkSpots.objects.all().order_by('percent_affected')
+            darkspots = DarkSpots.objects.all().order_by('-percent_affected')
             serializer = DarkSpotsSerializer(darkspots, many=True)
             return Response(serializer.data)
         except DarkSpots.DoesNotExist:
