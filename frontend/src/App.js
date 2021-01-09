@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { baseTheme } from "./theme/theme";
 import { GlobalStyle } from "./theme/GlobalStyle";
 
+import Layout from './components/Layout/Layout';
 import Home from './scenes/Home';
 
 const App = () => {
@@ -17,7 +18,7 @@ const App = () => {
     <BrowserRouter>
       <ThemeProvider theme={baseTheme}>
         <GlobalStyle />
-        {routes}
+        <Layout>{routes}</Layout>
       </ThemeProvider>
     </BrowserRouter>
   );
