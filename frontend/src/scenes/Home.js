@@ -63,7 +63,9 @@ const Home = () => {
       <DivHead>TODO: Main Motto</DivHead>
       <DivLinks>{quickNotes}</DivLinks>
       <Container bgColor="primary" color="background">
-        Short About Section
+      At BridgeIT, we strive to provide a user-friendly platform for donors to reach their donees efficiently 
+      and with ease, getting vital supplies to those who need it in the quickest time possible. BridgeIT aims 
+      to simplify the process of getting important supplies to communities in remote locations. 
       </Container>
       <Container>{faqsList}</Container>
       <Carousel />
