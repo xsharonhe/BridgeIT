@@ -1,8 +1,8 @@
 /* global google */
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import styled from "styled-components";
 import axios from "axios";
-import { compose, withProps, lifecycle } from "recompose";
+import { compose, withProps, lifecycle, withStateHandlers, withState } from "recompose";
 import { 
     GoogleMap, 
     Marker,
@@ -21,9 +21,23 @@ const Map = compose(
     withProps({
       googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
       loadingElement: <div style={{ height: `100%` }} />,
-      containerElement: <div style={{ height: `600px`, width: `600px` }} />,
+      containerElement: <div style={{ padding: '150px', height: `600px`, width: `600px` }} />,
       mapElement: <div style={{ height: `100%` }} />,
     }),
+    withStateHandlers(() => ({
+        hazardSelected: null,
+      }), {
+        onHazardSelect: ({ hazardSelected }) => (hazard) => ({
+          hazardSelected: hazard
+        })
+      }),
+    withStateHandlers(() => ({
+        darkSelected: null,
+      }), {
+        onDarkSelect: ({ darkSelected }) => (dark) => ({
+          darkSelected: dark
+        })
+      }),
     withScriptjs,
     withGoogleMap,
     lifecycle({
@@ -31,7 +45,7 @@ const Map = compose(
         axios
             .get(`http://localhost:8000/api/v1/darkspots`)
             .then(res => {
-                this.setState({darkSpots: res.data});
+                this.setState({ darkSpots: res.data });
             })
             .catch(err => {
                 console.log(err);
@@ -39,18 +53,23 @@ const Map = compose(
         axios
             .get(`http://localhost:8000/api/v1/hazards`)
             .then(res => {
-                this.setState({hazards: res.data} );
+                this.setState({ hazards: res.data } );
             })
             .catch(err => {
                 console.log(err);
             })
-            
+
         const DirectionsService = new google.maps.DirectionsService();
-   
+        
         DirectionsService.route({
             origin: new google.maps.LatLng(44.3148, -85.6024),
             destination: new google.maps.LatLng(45.289722, -80.143889),
             travelMode: google.maps.TravelMode.DRIVING,
+            waypoints: [
+                {
+                   location: new google.maps.LatLng(44.991, -74.74)
+                }
+           ]
           }, (result, status) => {
             if (status === google.maps.DirectionsStatus.OK) {
               this.setState({
@@ -62,14 +81,19 @@ const Map = compose(
           });
         }
       })
+
 )(({
     darkSpots,
     hazards,
-    directions
+    directions,
+    hazardSelected,
+    onHazardSelect,
+    darkSelected,
+    onDarkSelect
 }) =>
     <GoogleMap
-      defaultZoom={4.5}
-      defaultCenter={center}
+        defaultZoom={4.5}
+        defaultCenter={center}
     >
         {!!darkSpots && darkSpots.map((darkSpot) => (
             <Marker
@@ -81,6 +105,7 @@ const Map = compose(
                     origin: new window.google.maps.Point(0, 0),
                     anchor: new window.google.maps.Point(15, 15)
                 }}
+                onClick={() => onDarkSelect(darkSpot)}
             />
         ))}
         {!!hazards && hazards.map((hazard) => (
@@ -93,104 +118,36 @@ const Map = compose(
                     origin: new window.google.maps.Point(0, 0),
                     anchor: new window.google.maps.Point(15, 15)
                 }}
+                onClick={() => onHazardSelect(hazard)}
             />
         ))}
+        {darkSelected ? (
+            <InfoWindow position={{ lat: parseFloat(darkSelected.lat), lng: parseFloat(darkSelected.lon) }}>
+                <div> 
+                    <p>City: {darkSelected.city} </p>
+                    <p>Average drops: {darkSelected.avg_drops }</p>
+                    <p>Percent affected: {darkSelected.percent_affected} </p>
+                    <p>Risk: {darkSelected.avg_drops > 0.0080 ? 'HIGH' : 'MODERATE'}</p>
+                </div>
+            </InfoWindow>
+        ) : null}
+        {hazardSelected ? (
+            <InfoWindow position={{ lat: parseFloat(hazardSelected.lat), lng: parseFloat(hazardSelected.lon) }}>
+                <div> 
+                    <p>City: {hazardSelected.city} </p>
+                    <p>Severity score: {hazardSelected.severity_score}</p>
+                    <p>Total Incidents: {hazardSelected.incidents_total} </p>
+                    <p>Risk: {hazardSelected.severity_score > 1 ? 'HIGH' : 'MODERATE'}</p>
+                </div>
+            </InfoWindow>
+        ) : null}
         {!!directions && (
             <DirectionsRenderer 
                 directions={directions} 
             />
         )}
     </GoogleMap>
-  );
-
-// const Map = () => {
-//   const { isLoaded } = useLoadScript({
-//     googleMapsApiKey: 'AIzaSyC0eUPfjjKFyx_uosHpQyWIBoP-Uo1fDmg',
-//     libraries: ["places"]
-//   })
-
-//   const center = {
-//     lat: 43.651070, 
-//     lng: -79.347015
-//   };
-
-// {darkSelected ? (
-//     <InfoWindow position={{ lat: parseFloat(darkSelected.lat), lng: parseFloat(darkSelected.lon) }}>
-//         <div> 
-//             <p>City: {darkSelected.city} </p>
-//             <p>Average drops: {darkSelected.avg_drops }</p>
-//             <p>Percent affected: {darkSelected.percent_affected} </p>
-//             <p>Risk: {darkSelected.avg_drops > 0.0080 ? 'HIGH' : 'MODERATE'}</p>
-//         </div>
-//     </InfoWindow>
-// ) : null}
-// {hazardSelected ? (
-//     <InfoWindow position={{ lat: parseFloat(hazardSelected.lat), lng: parseFloat(hazardSelected.lon) }}>
-//         <div> 
-//             <p>City: {hazardSelected.city} </p>
-//             <p>Severity score: {hazardSelected.severity_score}</p>
-//             <p>Total Incidents: {hazardSelected.incidents_total} </p>
-//             <p>Risk: {hazardSelected.severity_score > 1 ? 'HIGH' : 'MODERATE'}</p>
-//         </div>
-//     </InfoWindow>
-// ) : null}
-//   const [map, setMap] = useState(null);
-//   const [error, setError] = useState(false);
-//   const [darkSpots, setDarkSpots] = useState([]);
-//   const [darkSelected, setDarkSelected] = useState(null);
-//   const [hazards, setHazards] = useState([]);
-//   const [hazardSelected, setHazardSelected] = useState(null);
-//   const [directions, setDirections] = useState();
-
-//   useEffect(() => {
-//     axios
-//         .get(`http://localhost:8000/api/v1/darkspots`)
-//         .then(res => {
-//             setDarkSpots(res.data);
-//         })
-//         .catch(err => {
-//             setError(true);
-//         })
-//     axios
-//         .get(`http://localhost:8000/api/v1/hazards`)
-//         .then(res => {
-//             setHazards(res.data);
-//         })
-//         .catch(err => {
-//             setError(true);
-//         })
-//   }, []);
-
-//   const onLoad = useCallback(function callback(map) {
-//     const bounds = new window.google.maps.LatLngBounds();
-//     map.fitBounds(bounds);
-//     setMap(map);
-//   }, [])
-
-//   const onUnmount = useCallback(function callback(map) {
-//     setMap(null)
-//   }, []);
-
-//     const origin = { lat: 40.756795, lng: -73.954298 };
-//     const destination = { lat: 41.756795, lng: -78.954298 };
-
-
-//     var directionsService = new window.google.maps.DirectionsService();
-//     var directionsRenderer = new window.google.maps.DirectionsRenderer();
-//     console.log(directionsService)
-//   return isLoaded ? (
-//       <Wrapper>
-//         <GoogleMap
-//             mapContainerStyle={containerStyle}
-//             center={center}
-//             zoom={4.5}
-//             onLoad={onLoad}
-//             onUnmount={onUnmount}
-//         >
-//         </GoogleMap>
-//       </Wrapper>
-//   ) : <div>Could not load</div>
-// }
+);
 
 const Wrapper = styled.div`
     display: flex;
