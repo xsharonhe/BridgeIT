@@ -12,7 +12,7 @@ const Home = () => {
   const notesList = [
     {
       caption: "Reason 1",
-      text: "And here are a few words!",
+      text: "Bringing attention to communities in remote locations in need of depleting supplies ",
       icon: <UserFriends />,
     },
     {
@@ -38,7 +38,7 @@ const Home = () => {
   });
 
   const faqs = [
-    { ques: "Question 1", ans: "Ans 1" },
+    { ques: "How does BridgeIT work?", ans: "Ans 1" },
     { ques: "Question 2", ans: "Ans 2" },
     { ques: "Question 3", ans: "Ans 3" },
   ];
@@ -62,10 +62,14 @@ const Home = () => {
     <HomePage>
       <DivHead>TODO: Main Motto</DivHead>
       <DivLinks>{quickNotes}</DivLinks>
-      <Container bgColor="primary" color="background">
-      At BridgeIT, we strive to provide a user-friendly platform for donors to reach their donees efficiently 
-      and with ease, getting vital supplies to those who need it in the quickest time possible. BridgeIT aims 
-      to simplify the process of getting important supplies to communities in remote locations. 
+      <Container bgColor="primary" color="background" >
+        
+
+          At BridgeIT, we strive to provide a user-friendly platform for donors to reach their donees efficiently 
+          and with ease, getting vital supplies to those who need it in the quickest time possible. BridgeIT aims 
+          to simplify the process of getting important supplies to communities in remote locations.
+
+
       </Container>
       <Container>{faqsList}</Container>
       <Carousel />
