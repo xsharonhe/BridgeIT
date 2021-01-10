@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Helmet } from 'react-helmet';
 import Table from "../components/Containers/Table";
 import { Container, Text, Input } from "../components";
 import { Link } from "react-router-dom";
@@ -70,6 +71,7 @@ class Dashboard extends React.Component {
 
     return (
       <DashboardPage>
+        <Helmet><title>BridgeIT | Dashboard</title></Helmet>
         <SContainer>
           <div>
             TODO: Insert data about item if clicked in table below (ie. route,
