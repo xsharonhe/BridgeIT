@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Helmet } from 'react-helmet';
+import axios from "axios";
+import Geocode from "react-geocode";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow
+} from "@react-google-maps/api";
 import Table from "../components/Containers/Table";
 import { Container, Text, Input } from "../components";
 import { Link } from "react-router-dom";
@@ -12,20 +19,60 @@ import {
   FormButton,
 } from "../components/Containers/FormStyles";
 
-class Dashboard extends React.Component {
-  state = {
-    itemName: "",
-    itemQuant: "",
-  };
+const center = {
+  lat: 43.651070, 
+  lng: -79.347015
+}
 
-  handleChange = (e) => {
+const DashboardDonee = () => {
+    const [userData, setUserData] = useState({
+      itemName: "",
+      itemQuant: ""
+    })
+    const [donations, setDonations] = useState([{}]);
+    const [selectedDonation, setSelectedDonation] = useState(null);
+    const [points, setPoints] = useState([])
+    const [noError, setNoError] = useState(false);
+
+    useEffect(() => {
+      Geocode.setApiKey('AIzaSyCeeQ34bwux-4A9-xEJuTvX59ALojo7HmE')
+      Geocode.setLanguage("en");
+      Geocode.setRegion("us");
+      Geocode.enableDebug();
+      axios
+        .get('http://localhost:8000/api/v1/items/donations')
+        .then(res => {
+          const don = res.data;
+          for(let i=0; i < don.length; i++) {
+            Geocode.fromAddress(don[i].location).then(
+              response => {
+                const { lat, lng } = response.results[0].geometry.location;
+                setPoints(points => [...points, { lat: lat, lng: lng }])
+              },
+              error => {
+                console.error(error);
+              }
+            )
+          }
+          setDonations(don);
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      let timer = setTimeout(() => {
+        setNoError(true);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }, [userData]);
+
+  const handleChange = (e) => {
     e.preventDefault();
     this.setState({
       [e.target.name]: e.target.value,
     });
   };
 
-  handleClick = (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
 
     if (this.state.username === "" || this.state.password === "") {
@@ -37,7 +84,6 @@ class Dashboard extends React.Component {
     }
   };
 
-  render() {
     const items = [
       {
         name: "ITEM 1",
@@ -68,25 +114,40 @@ class Dashboard extends React.Component {
         route: "ROUTE 4",
       },
     ];
+    const { isLoaded } = useLoadScript({
+      googleMapsApiKey: `${process.env.REACT_APP_API_KEY}`
+    })
 
     return (
       <DashboardPage>
-        <Helmet><title>BridgeIT | Dashboard</title></Helmet>
         <SContainer>
-          <div>
-            TODO: Insert data about item if clicked in table below (ie. route,
-            directions, etc.)
-          </div>
+          <div style={{ marginRight: '30px' }}>
+          {!!isLoaded && noError && (
+            <GoogleMap
+              mapContainerStyle={{ width: '600px', height: '400px' }}
+              center={center}
+              zoom={5.5}
+            > 
+            {donations.map((donation, i) => (
+              <Marker 
+                key={donation.location}
+                position={{ lat: parseFloat(points[i].lat), lng: parseFloat(points[i].lng) }}
+                onClick={() => setSelectedDonation(donation)}
+              />
+            ))}
+            </GoogleMap>
+          )}
+        </div>
           <SFormWrapper>
-            <FormText>Donate Item</FormText>
+            <FormText>Request Item</FormText>
             <SForm>
               <Input
                 name="itemName"
                 type="text"
                 align="center"
                 placeholder="Name"
-                value={this.state.itemName}
-                onChange={this.handleChange}
+                value={userData.itemName}
+                onChange={handleChange}
                 style={{ width: "85%", marginBottom: "8%" }}
                 required
               />
@@ -96,12 +157,12 @@ class Dashboard extends React.Component {
                 align="center"
                 placeholder="Quantity"
                 min="0"
-                value={this.state.itemQuant}
-                onChange={this.handleChange}
+                value={userData.itemQuant}
+                onChange={handleChange}
                 style={{ width: "85%", marginBottom: "8%" }}
                 required
               />
-              <FormButton onClick={this.handleClick}>Add Item</FormButton>
+              <FormButton onClick={handleClick}>Add Item</FormButton>
             </SForm>
           </SFormWrapper>
         </SContainer>
@@ -120,7 +181,7 @@ class Dashboard extends React.Component {
         </Container>
       </DashboardPage>
     );
-  }
+
 }
 
 const DashboardPage = styled.div`
@@ -145,4 +206,4 @@ const TableWrapper = styled.div`
   align-items: center;
 `;
 
-export default Dashboard;
+export default DashboardDonee;

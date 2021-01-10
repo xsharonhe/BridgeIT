@@ -12,7 +12,8 @@ import SignIn from "./scenes/SignIn";
 import SignUp from "./scenes/SignUp";
 
 import BorderRouteOptions from "./scenes/BorderRouteOptions";
-import Dashboard from "./scenes/Dashboard";
+import DashboardDonee from "./scenes/DashboardDonee";
+import DashboardDonar from "./scenes/DashboardDonar";
 import Map from "./scenes/Map";
 
 const App = () => {
@@ -22,7 +23,8 @@ const App = () => {
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
       <Route path='/route_options' component={BorderRouteOptions} />
-      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/dashboard/donee" component={DashboardDonee} />
+      <Route path="/dashboard/donar" component={DashboardDonar} />
       <Route path="/map" component={Map} />
     </Switch>
   );
