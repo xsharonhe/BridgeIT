@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Helmet } from 'react-helmet';
 
 import { UserFriends } from "@styled-icons/fa-solid/UserFriends";
 import { HandHoldingMedical } from "@styled-icons/fa-solid/HandHoldingMedical";
@@ -81,7 +82,7 @@ const Home = () => {
       <S2Container   bgColor="background" color="background">
           <img src={HomeLogoG}/>
       </S2Container>
-      
+
       <DivLinks>{quickNotes}</DivLinks>
       
       <SContainer bgColor="primary" color="background" font-size="20px" >
@@ -124,6 +125,9 @@ const SContainer = styled(Container)`
 
 const HomePage = styled.div`
   margin: 2% 0;
+  ${({ theme }) => `
+      font-family: ${theme.font.body};
+  `};
 `;
 
 const DivHead = styled.div`
