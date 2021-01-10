@@ -36,7 +36,7 @@ const DashboardDonar = () => {
     const [noError, setNoError] = useState(false);
 
     useEffect(() => {
-      Geocode.setApiKey('AIzaSyCeeQ34bwux-4A9-xEJuTvX59ALojo7HmE')
+      Geocode.setApiKey(`${process.env.REACT_APP_API_KEY}`)
       Geocode.setLanguage("en");
       Geocode.setRegion("us");
       Geocode.enableDebug();
@@ -116,7 +116,7 @@ const DashboardDonar = () => {
       },
     ];
     const { isLoaded } = useLoadScript({
-      googleMapsApiKey: `${process.env.REACT_APP_API_KEY}`
+      googleMapsApiKey: 'AIzaSyC0eUPfjjKFyx_uosHpQyWIBoP-Uo1fDmg'
     })
 
     return (
