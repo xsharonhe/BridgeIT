@@ -100,9 +100,11 @@ const Map = compose(
     darkSelected,
     onDarkSelect,
     isOpen,
-    onOpen
+    onOpen,
+    id
 }) =>
     <Wrapper>
+        <div>{id}</div>
         <Container>
             <p> Control smart features </p>
             <label style={{ margin: '0 10px' }}> On</label>

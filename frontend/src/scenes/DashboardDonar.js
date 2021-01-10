@@ -116,7 +116,7 @@ const DashboardDonar = () => {
       },
     ];
     const { isLoaded } = useLoadScript({
-      googleMapsApiKey: `${process.env.REACT_APP_API_KEY}`
+      googleMapsApiKey: 'AIzaSyC0eUPfjjKFyx_uosHpQyWIBoP-Uo1fDmg'
     })
 
     return (
