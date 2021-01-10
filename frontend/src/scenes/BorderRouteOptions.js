@@ -5,6 +5,7 @@ import styled from "styled-components";
 import axios from "axios";
 
 import { OptionCard } from "../components";
+import Loader from "../components/UI/Loader";
 
 const BorderRouteOptions = ({
     ...props
@@ -40,7 +41,12 @@ const BorderRouteOptions = ({
             <Heading style={{ marginLeft: '50px' }}>Choose a route:</Heading> 
             <h2 style={{ marginLeft: '50px' }}>From your address in Ann Arbor, Michigan:</h2> 
             <Wrapper>
-                {!!error ? <div> Data is fetching...</div>
+                {!!error ? (
+                    <div style={{ width: '200px', height: '200px'}}>
+                        <Loader /> 
+                        <p align="center">Data is fetching...</p>
+                    </div>
+                )
                     : 
                 borderOptions.map((borderOption) => (
                     <BorderWrapper>

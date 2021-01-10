@@ -12,9 +12,9 @@ import {
   FormText,
   FormButton,
 } from "../components/Containers/FormStyles";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
-const SignIn = ({ signIn, isAuthenticated }) => {
+const SignIn = ({ signIn, isAuthenticated, userType }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -83,6 +83,7 @@ const SignIn = ({ signIn, isAuthenticated }) => {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  userType: state.profile.user_type,
 });
 
 export default connect(mapStateToProps, { signIn })(SignIn);
