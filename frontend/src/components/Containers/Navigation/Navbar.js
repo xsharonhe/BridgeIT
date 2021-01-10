@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
-import { Brand } from "../../Texts/Brand";
+import Brand from "../../Texts/Brand";
 import { connect } from "react-redux";
 import { signOut } from "../../../store/actions/authActions";
 import Cookies from "js-cookie";
@@ -13,8 +13,9 @@ const Navbar = ({ isAuthenticated, signOut }) => {
   };
 
   const signedIn = [
+    { name: "Dashboard", link: "/dashboard" },
+    { name: "Account", link: "/" },
     { name: "Dashboard", link: "/dashboard/donor" },
-    // { name: "Sign Out", link: "/" },
   ];
   const signedOut = [
     { name: "Home", link: "/" },
