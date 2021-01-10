@@ -1,58 +1,38 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import Select from "react-select";
 
 import { OptionCard } from "../components";
-
-const options = [
-    { value: "Windsor", label: "Windsor - Ambassador Bridge" },
-    { value: "Sarnia", label: "Sarnia" },
-    { value: "FortErie", label: "Fort Erie" },
-    { value: "Queenston", label: "Queenston" },
-    { value: "Lansdowne", label: "Lansdowne" },
-    { value: "Prescott", label: "Prescott" },
-    { value: "Cornwall", label: "Cornwall" },
-    { value: "", label: "All routes" }
-  ];
 
 const BorderRouteOptions = ({
     ...props
 }) => {
-    const [selectedValue, setSelectedValue] = useState(
-        options[0].value
-    );
     const [borderOptions, setBorderOptions] = useState([]);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(true);
     useEffect(() => {
         setBorderOptions([]);
         axios
-            .get(`http://localhost:8000/api/v1/ml/?place=${selectedValue}`)
+            .get(`http://localhost:8000/api/v1/ml/?origins=AnnArbor`)
             .then(res => {
-                console.log(res)
-                setBorderOptions(res.data.query);
+                setBorderOptions(res.data.smallest);
+                console.log(res.data.smallest)
             })
             .catch(err => {
                 setError(true);
-            })
-    }, [selectedValue]);
+            });
+        let timer = setTimeout(() => {
+            setError(false);
+        }, 20000);
+        return () => clearTimeout(timer);
+    }, []);
     return (
         <Container {...props}>
-            <SelectHeader>
-                <StyledSelect
-                    onChange={(e) => {
-                        setSelectedValue(e.label);
-                    }}
-                    placeholder={selectedValue}
-                    options={options}
-                />
-            </SelectHeader>
             <Wrapper>
-                {!!error ? <div> Data cannot be fetched</div>
+                {!!error ? <div> Data is fetching...</div>
                     : 
                 borderOptions.map((borderOption) => (
                     <OptionCard 
-                        key={`${borderOption.location}-${borderOption.hour}`}
+                        key={`${borderOption.location}-${borderOption.hour}-${borderOption.weekday}`}
                         location={borderOption.location}
                         time={borderOption.hour}
                         weekday={borderOption.weekday}
@@ -71,9 +51,6 @@ const Wrapper = styled.div`
     flex-direction: row;
 `;
 const Container = styled.div`
-`;
-const StyledSelect = styled(Select)`
-    width: 200px;
 `;
 const SelectHeader = styled.div`
     display: flex;
