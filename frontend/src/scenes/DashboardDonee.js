@@ -29,13 +29,15 @@ const DashboardDonee = () => {
       itemName: "",
       itemQuant: ""
     })
-    const [donations, setDonations] = useState([]);
+    const [donations, setDonations] = useState([{}]);
     const [selectedDonation, setSelectedDonation] = useState(null);
-    
+    const [points, setPoints] = useState([])
+    const [noError, setNoError] = useState(false);
+
     useEffect(() => {
-      Geocode.setApiKey(`${process.env.API_KEY}`)
+      Geocode.setApiKey('AIzaSyCeeQ34bwux-4A9-xEJuTvX59ALojo7HmE')
       Geocode.setLanguage("en");
-      Geocode.setRegion("es");
+      Geocode.setRegion("us");
       Geocode.enableDebug();
       axios
         .get('http://localhost:8000/api/v1/items/donations')
@@ -45,11 +47,7 @@ const DashboardDonee = () => {
             Geocode.fromAddress(don[i].location).then(
               response => {
                 const { lat, lng } = response.results[0].geometry.location;
-                don[i] = {
-                  ...don[i],
-                  "lat": lat,
-                  "lng": lng
-                }
+                setPoints(points => [...points, { lat: lat, lng: lng }])
               },
               error => {
                 console.error(error);
@@ -61,6 +59,10 @@ const DashboardDonee = () => {
         .catch(err => {
           console.log(err)
         })
+      let timer = setTimeout(() => {
+        setNoError(true);
+      }, 2000);
+      return () => clearTimeout(timer);
     }, [userData]);
 
   const handleChange = (e) => {
@@ -113,30 +115,31 @@ const DashboardDonee = () => {
       },
     ];
     const { isLoaded } = useLoadScript({
-      googleMapsApiKey: process.env.REACT_APP_API_KEY
+      googleMapsApiKey: 'AIzaSyCeeQ34bwux-4A9-xEJuTvX59ALojo7HmE'
     })
 
     return (
       <DashboardPage>
         <SContainer>
           <div style={{ marginRight: '30px' }}>
-          {!!isLoaded && (
+          {!!isLoaded && noError && (
             <GoogleMap
               mapContainerStyle={{ width: '600px', height: '400px' }}
               center={center}
               zoom={5.5}
             > 
-            {donations.map(donation => (
+            {donations.map((donation, i) => (
               <Marker 
                 key={donation.location}
-                position={{ lat: donation.lat, lng: donation.lng }}
+                position={{ lat: parseFloat(points[i].lat), lng: parseFloat(points[i].lng) }}
+                onClick={() => setSelectedDonation(donation)}
               />
             ))}
             </GoogleMap>
           )}
         </div>
           <SFormWrapper>
-            <FormText>Donate Item</FormText>
+            <FormText>Request Item</FormText>
             <SForm>
               <Input
                 name="itemName"
