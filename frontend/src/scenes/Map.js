@@ -70,13 +70,19 @@ const Map = compose(
         const DirectionsService = new google.maps.DirectionsService();
         
         DirectionsService.route({
-            origin: new google.maps.LatLng(44.3148, -85.6024),
-            destination: new google.maps.LatLng(45.289722, -80.143889),
+            origin: new google.maps.LatLng(42.6526, -73.7562),
+            destination: new google.maps.LatLng(45.32111, -80.065286),
             travelMode: google.maps.TravelMode.DRIVING,
             provideRouteAlternatives: true,
             waypoints: [
                 {
-                   location: new google.maps.LatLng(44.991, -74.74)
+                    location: new google.maps.LatLng(44.374, -75.983) // port
+                },
+                {
+                    location: new google.maps.LatLng(45.298353,-79.904513) // Seguine Pioneer United Church
+                },
+                {
+                    location: new google.maps.LatLng(45.3087, -79.97135) // Oastler Lake Provincial Park
                 }
            ]
           }, (result, status) => {
@@ -100,11 +106,9 @@ const Map = compose(
     darkSelected,
     onDarkSelect,
     isOpen,
-    onOpen,
-    id
+    onOpen
 }) =>
     <Wrapper>
-        <div>{id}</div>
         <Container>
             <p> Control smart features </p>
             <label style={{ margin: '0 10px' }}> On</label>
