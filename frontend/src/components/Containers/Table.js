@@ -1,37 +1,42 @@
 import React from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import { Text } from "../";
 
 const Table = ({ data }) => (
   <TableMarkup titles={Object.keys(data[0])} data={data} />
 );
 
-const TableMarkup = ({ caption, titles, data }) => (
-  <StyledTable>
-    <caption><Text align="center" bold>{caption}</Text></caption>
-    <colgroup>
-      <col />
-      <col />
-      <col />
-    </colgroup>
-    <thead>
-      <tr>
-        {titles.map((title, i) => (
-          <th key={i}>{title.toUpperCase()}</th>
-        ))}
-      </tr>
-    </thead>
-    <tbody>
-      {data.map((item, i) => (
-        <tr key={i}>
+const TableMarkup = ({ caption, titles, data }) => {
+  let history = useHistory();
+  return (
+    <StyledTable>
+      <caption><Text align="center" bold>{caption}</Text></caption>
+      <colgroup>
+        <col />
+        <col />
+        <col />
+      </colgroup>
+      <thead>
+        <tr>
           {titles.map((title, i) => (
-            <td key={i}>{item[title]}</td>
+            <th key={i}>{title.toUpperCase()}</th>
           ))}
         </tr>
-      ))}
-    </tbody>
-  </StyledTable>
-);
+      </thead>
+      <tbody>
+        {data.map((item, i) => (
+          <tr key={i}>
+            {titles.map((title, i) => (
+              <td key={i} onClick={() => history.push('/route_options')}>{item[title]}</td>
+            ))}
+          </tr>
+        ))}
+        
+      </tbody>
+    </StyledTable>
+  );
+}
 
 const StyledTable = styled.table`
   ${({ theme }) => `
