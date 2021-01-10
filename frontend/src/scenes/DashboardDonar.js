@@ -92,7 +92,7 @@ const items = [
         expiry: "2021-01-22",
         is_matched: "No",
         receiver: "Seguine Pioneer United Church",
-        route: "Route 1",
+        route: "",
       },
   ];
 
@@ -144,6 +144,7 @@ const DashboardDonar = () => {
   const [points, setPoints] = useState([]);
   const [noError, setNoError] = useState(false);
   const [fetchedItems, setFetchedItems] = useState(items);
+  const [gone, setGone] = useState(true);
 
   useEffect(() => {
     Geocode.setApiKey(`${process.env.REACT_APP_API_KEY}`);
@@ -189,7 +190,8 @@ const DashboardDonar = () => {
       }, 20000);
     timer = setTimeout(() => {
         setFetchedItems(afterMatch)
-    }, 25000);
+        setGone(false);
+    }, 23000);
     return () => clearTimeout(timer);
   }, [itemData]);
 
@@ -212,18 +214,18 @@ const DashboardDonar = () => {
 
     setItemData({ ...itemData, [e.target.name]: e.target.value });
 
-    if (this.state.username === "" || this.state.password === "") {
-      console.log("one of the input fields is empty");
-      alert("Please recheck your credentials.");
-    } else {
-      console.log(this.state.username, this.state.password);
-      console.log("sign in button clicked");
-    }
+    // if (this.state.username === "" || this.state.password === "") {
+    //   console.log("one of the input fields is empty");
+    //   alert("Please recheck your credentials.");
+    // } else {
+    //   console.log(this.state.username, this.state.password);
+    //   console.log("sign in button clicked");
+    // }
     
   };
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyC0eUPfjjKFyx_uosHpQyWIBoP-Uo1fDmg",
+    googleMapsApiKey: `${process.env.REACT_APP_API_KEY}`,
   });
 
   return (
@@ -249,6 +251,12 @@ const DashboardDonar = () => {
                   onClick={() => setSelectedDonation(donation)}
                 />
               ))}
+              {!!gone && (
+                  <Marker 
+                    key='45.298353'
+                    position={{ lat: 45.2983533, lng: -79.904513 }}
+                />
+              )}
             </GoogleMap>
           )}
         </div> 
@@ -260,7 +268,7 @@ const DashboardDonar = () => {
               type="text"
               align="center"
               placeholder="Name"
-              value={itemData.name}
+              defaultValue={itemData.name}
               onChange={handleChange}
               style={{ width: "85%", marginBottom: "8%" }}
             />
@@ -270,7 +278,7 @@ const DashboardDonar = () => {
               align="center"
               placeholder="Quantity"
               min="0"
-              value={itemData.quantity}
+              defaultValue={itemData.quantity}
               onChange={handleChange}
               style={{ width: "85%", marginBottom: "8%" }}
             />
@@ -280,17 +288,16 @@ const DashboardDonar = () => {
               align="center"
               placeholder="Product Expiry Date"
               min="0"
-              value={itemData.expiry}
+              defaultValue={itemData.expiry}
               onChange={handleChange}
               style={{ width: "85%", marginBottom: "8%" }}
             />
             <Input
               name="location"
-              type="number"
+              type="text"
               align="center"
               placeholder="Your Address"
-              min="0"
-              value={itemData.location}
+              defaultValue={itemData.location}
               onChange={handleChange}
               style={{ width: "85%", marginBottom: "8%" }}
             />
