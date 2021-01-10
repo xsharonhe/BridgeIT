@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 import axios from "axios";
 import Geocode from "react-geocode";
 import {
   GoogleMap,
   useLoadScript,
   Marker,
-  InfoWindow
+  InfoWindow,
 } from "@react-google-maps/api";
 import Table from "../components/Containers/Table";
 import { Container, Text, Input } from "../components";
@@ -21,50 +21,53 @@ import {
 } from "../components/Containers/FormStyles";
 
 const center = {
-  lat: 43.651070, 
-  lng: -79.347015
-}
+  lat: 43.65107,
+  lng: -79.347015,
+};
 
 const DashboardDonar = () => {
-    const [userData, setUserData] = useState({
-      itemName: "",
-      itemQuant: ""
-    })
-    const [donations, setDonations] = useState([{}]);
-    const [selectedDonation, setSelectedDonation] = useState(null);
-    const [points, setPoints] = useState([])
-    const [noError, setNoError] = useState(false);
+  const [itemData, setItemData] = useState({
+    name: "",
+    quantity: "",
+    is_donation: true,
+    expiry: null,
+    location: "",
+  });
+  const [donations, setDonations] = useState([{}]);
+  const [selectedDonation, setSelectedDonation] = useState(null);
+  const [points, setPoints] = useState([]);
+  const [noError, setNoError] = useState(false);
 
-    useEffect(() => {
-      Geocode.setApiKey(`${process.env.REACT_APP_API_KEY}`)
-      Geocode.setLanguage("en");
-      Geocode.setRegion("us");
-      Geocode.enableDebug();
-      axios
-        .get('http://localhost:8000/api/v1/items/requests')
-        .then(res => {
-          const don = res.data;
-          for(let i=0; i < don.length; i++) {
-            Geocode.fromAddress(don[i].location).then(
-              response => {
-                const { lat, lng } = response.results[0].geometry.location;
-                setPoints(points => [...points, { lat: lat, lng: lng }])
-              },
-              error => {
-                console.error(error);
-              }
-            )
-          }
-          setDonations(don);
-        })
-        .catch(err => {
-          console.log(err)
-        })
-      let timer = setTimeout(() => {
-        setNoError(true);
-      }, 2000);
-      return () => clearTimeout(timer);
-    }, [userData]);
+  useEffect(() => {
+    Geocode.setApiKey(`${process.env.REACT_APP_API_KEY}`);
+    Geocode.setLanguage("en");
+    Geocode.setRegion("us");
+    Geocode.enableDebug();
+    axios
+      .get("http://localhost:8000/api/v1/items/requests")
+      .then((res) => {
+        const don = res.data;
+        for (let i = 0; i < don.length; i++) {
+          Geocode.fromAddress(don[i].location).then(
+            (response) => {
+              const { lat, lng } = response.results[0].geometry.location;
+              setPoints((points) => [...points, { lat: lat, lng: lng }]);
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
+        }
+        setDonations(don);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    let timer = setTimeout(() => {
+      setNoError(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [itemData]);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -85,106 +88,138 @@ const DashboardDonar = () => {
     }
   };
 
-    const items = [
-      {
-        name: "ITEM 1",
-        quantity: "QUANTITY 1",
-        status: "STATUS 1",
-        arrival: "ARRIVAL 1",
-        route: "ROUTE 1",
-      },
-      {
-        name: "ITEM 2",
-        quantity: "QUANTITY 2",
-        status: "STATUS 2",
-        arrival: "ARRIVAL 2",
-        route: "ROUTE 2",
-      },
-      {
-        name: "ITEM 3",
-        quantity: "QUANTITY 3",
-        status: "STATUS 3",
-        arrival: "ARRIVAL 3",
-        route: "ROUTE 3",
-      },
-      {
-        name: "ITEM 4",
-        quantity: "QUANTITY 4",
-        status: "STATUS 4",
-        arrival: "ARRIVAL 4",
-        route: "ROUTE 4",
-      },
-    ];
-    const { isLoaded } = useLoadScript({
-      googleMapsApiKey: 'AIzaSyC0eUPfjjKFyx_uosHpQyWIBoP-Uo1fDmg'
-    })
+  // Get Table Data
+  const config = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
 
-    return (
-      <DashboardPage>
-        <Helmet><title>BridgeIT | Dashboard</title></Helmet>
-        <SContainer>
-          <div style={{ marginRight: '30px' }}>
+  const res =  axios.get("http://localhost:8000/api/v1/items/donorname", config);
+
+  const items = [
+    {
+      name: "ITEM 1",
+      quantity: "QUANTITY 1",
+      status: "STATUS 1",
+      arrival: "ARRIVAL 1",
+      route: "ROUTE 1",
+    },
+    {
+      name: "ITEM 2",
+      quantity: "QUANTITY 2",
+      status: "STATUS 2",
+      arrival: "ARRIVAL 2",
+      route: "ROUTE 2",
+    },
+    {
+      name: "ITEM 3",
+      quantity: "QUANTITY 3",
+      status: "STATUS 3",
+      arrival: "ARRIVAL 3",
+      route: "ROUTE 3",
+    },
+    {
+      name: "ITEM 4",
+      quantity: "QUANTITY 4",
+      status: "STATUS 4",
+      arrival: "ARRIVAL 4",
+      route: "ROUTE 4",
+    },
+  ];
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyC0eUPfjjKFyx_uosHpQyWIBoP-Uo1fDmg",
+  });
+
+  return (
+    <DashboardPage>
+      <Helmet>
+        <title>BridgeIT | Dashboard</title>
+      </Helmet>
+      <SContainer>
+        {/* <div style={{ marginRight: "30px" }}>
           {!!isLoaded && noError && (
             <GoogleMap
-              mapContainerStyle={{ width: '600px', height: '400px' }}
+              mapContainerStyle={{ width: "600px", height: "400px" }}
               center={center}
               zoom={5.5}
-            > 
-            {donations.map((donation, i) => (
-              <Marker 
-                key={donation.location}
-                position={{ lat: parseFloat(points[i].lat), lng: parseFloat(points[i].lng) }}
-                onClick={() => setSelectedDonation(donation)}
-              />
-            ))}
+            >
+              {donations.map((donation, i) => (
+                <Marker
+                  key={donation.location}
+                  position={{
+                    lat: parseFloat(points[i].lat),
+                    lng: parseFloat(points[i].lng),
+                  }}
+                  onClick={() => setSelectedDonation(donation)}
+                />
+              ))}
             </GoogleMap>
           )}
-        </div>
-          <SFormWrapper>
-            <FormText>Donate Item</FormText>
-            <SForm>
-              <Input
-                name="itemName"
-                type="text"
-                align="center"
-                placeholder="Name"
-                value={userData.itemName}
-                onChange={handleChange}
-                style={{ width: "85%", marginBottom: "8%" }}
-                required
-              />
-              <Input
-                name="itemQuant"
-                type="number"
-                align="center"
-                placeholder="Quantity"
-                min="0"
-                value={userData.itemQuant}
-                onChange={handleChange}
-                style={{ width: "85%", marginBottom: "8%" }}
-                required
-              />
-              <FormButton onClick={handleClick}>Add Item</FormButton>
-            </SForm>
-          </SFormWrapper>
-        </SContainer>
-        <Container>
-          <Text
-            font="header"
-            size="defaultLarger"
-            bold
-            style={{ marginBottom: "2%" }}
-          >
-            Table Title?
-          </Text>
-          <TableWrapper V H>
-            <Table data={items} />
-          </TableWrapper>
-        </Container>
-      </DashboardPage>
-    );
-
-}
+        </div> */}
+        <SFormWrapper>
+          <FormText>Donate Item</FormText>
+          <SForm>
+            <Input
+              name="name"
+              type="text"
+              align="center"
+              placeholder="Name"
+              value={itemData.name}
+              onChange={handleChange}
+              style={{ width: "85%", marginBottom: "8%" }}
+            />
+            <Input
+              name="quantity"
+              type="number"
+              align="center"
+              placeholder="Quantity"
+              min="0"
+              value={itemData.quantity}
+              onChange={handleChange}
+              style={{ width: "85%", marginBottom: "8%" }}
+            />
+            <Input
+              name="expiry"
+              type="number"
+              align="center"
+              placeholder="Product Expiry Date"
+              min="0"
+              value={itemData.expiry}
+              onChange={handleChange}
+              style={{ width: "85%", marginBottom: "8%" }}
+            />
+            <Input
+              name="location"
+              type="number"
+              align="center"
+              placeholder="Your Address"
+              min="0"
+              value={itemData.location}
+              onChange={handleChange}
+              style={{ width: "85%", marginBottom: "8%" }}
+            />
+            <FormButton onClick={handleClick}>Add Item</FormButton>
+          </SForm>
+        </SFormWrapper>
+      </SContainer>
+      <Container>
+        <Text
+          font="header"
+          size="defaultLarger"
+          bold
+          style={{ marginBottom: "2%" }}
+        >
+          Table Title?
+        </Text>
+        <TableWrapper V H>
+          <Table data={items} />
+        </TableWrapper>
+      </Container>
+    </DashboardPage>
+  );
+};
 
 const DashboardPage = styled.div`
   margin: 2% 0;

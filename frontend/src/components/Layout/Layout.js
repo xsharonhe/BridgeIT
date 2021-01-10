@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
-import Navbar from '../Containers/Navigation/Navbar';
-import Footer from '../Containers/Navigation/Footer';
+import Navbar from "../Containers/Navigation/Navbar";
+import Footer from "../Containers/Navigation/Footer";
 
-const Layout = ({ children }) => {
+import { checkAuth } from "../../store/actions/authActions";
+import { connect } from "react-redux";
+
+const Layout = ({ children, checkAuth }) => {
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
   return (
     <LayoutWrapper>
       <Navbar />
@@ -15,10 +22,10 @@ const Layout = ({ children }) => {
 };
 
 const LayoutWrapper = styled.div`
-    position: relative;
-    min-height: 100vh;
+  position: relative;
+  min-height: 100vh;
 `;
 
 const Page = styled.main``;
 
-export default Layout;
+export default connect(null, { checkAuth })(Layout);
