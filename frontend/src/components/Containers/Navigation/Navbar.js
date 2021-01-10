@@ -13,8 +13,7 @@ const Navbar = ({ isAuthenticated, signOut }) => {
   };
 
   const signedIn = [
-    { name: "Dashboard", link: "/dashboard" },
-    { name: "Account", link: "/" },
+    { name: "Dashboard", link: "/dashboard/donor" },
     // { name: "Sign Out", link: "/" },
   ];
   const signedOut = [

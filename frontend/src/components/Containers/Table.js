@@ -29,6 +29,7 @@ const TableMarkup = ({ caption, titles, data }) => (
           ))}
         </tr>
       ))}
+      
     </tbody>
   </StyledTable>
 );
