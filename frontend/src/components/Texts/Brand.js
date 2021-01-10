@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Brand = ({ children, ...props }) => {
+const Brand = ({ children, ...props }) => {
   return <SText {...props}>{children}</SText>;
 };
 
@@ -18,3 +18,5 @@ const SText = styled.h1`
     }
     `}
 `;
+
+export default Brand;
