@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Slider from "infinite-react-carousel";
+import { Container, Text } from '../';
+import truckHome from "./truckHome.png";
 import { Text } from '../';
 
 export default class Carousel extends Component {
@@ -14,10 +16,10 @@ export default class Carousel extends Component {
     };
 
     const slideContent = [
-      { content: "Content 1 (pauses on hover)" },
-      { content: "Content 2 (pauses on hover)" },
-      { content: "Content 3 (pauses on hover)" },
-      { content: "Content 4 (pauses on hover)" },
+      { content: <img src="https://image.freepik.com/free-vector/medicine-health-help-support-donation-concept_140689-945.jpg"/>},
+      { content: <img src="https://media.istockphoto.com/videos/hands-forming-a-heart-luma-matte-loopable-f111f338-valentines-day-video-id465502031?s=640x640"/> },
+      { content: <img src="https://www.bridgestogether.org/wp-content/uploads/2018/04/cropped-bridges-together-siteicon.png"/> },
+      { content: <img src={truckHome}/> },
     ];
 
     const slides = slideContent.map((slide) => {
