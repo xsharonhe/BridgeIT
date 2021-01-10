@@ -58,6 +58,8 @@ export const baseTheme = {
         `  
     },
     colors: {
+        homebg: '#739284',
+        homebg2:'#8aa59a',
         primary: '#0f2f24',
         secondary: '#2d4d42',
         background: '#efefef',
