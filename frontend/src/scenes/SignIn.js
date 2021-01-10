@@ -34,6 +34,7 @@ const SignIn = ({ signIn, isAuthenticated, userType }) => {
     const token = Cookies.get('csrftoken');
     signIn(username, password, token);
   };
+  console.log(isAuthenticated)
 
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;

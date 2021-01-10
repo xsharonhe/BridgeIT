@@ -4,7 +4,7 @@ import { Container, Text } from "../../";
 const Footer = () => {
     return (
         <Container bgColor="primary">
-            <Text color="background" align="center" bold>TODO: Footer</Text>
+            <Text color="background" align="center" bold>Restart. Repurpose. Restart. Bring Us Together. BridgeIT</Text>
         </Container>
     )
 }
