@@ -209,7 +209,7 @@ const DashboardDonee = () => {
             bold
             style={{ marginBottom: "2%" }}
           >
-            Table Title?
+            Your donations:
           </Text>
           <TableWrapper V H>
             <Table data={items} />
