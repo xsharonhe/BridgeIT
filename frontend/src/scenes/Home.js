@@ -88,9 +88,11 @@ const Home = () => {
        
        
 
-      <p>Amidst the global pandemic, many remote communities are being neglected and are in dire need of 
-      various medical supplies. At BridgeIT, we strive to provide a user-friendly platform that allows 
-      medical organizations to easily view and support the specific medical needs of remote communities nearby. </p>
+      <p>Did you know that many First Nations communities in Canada are living in 2021 with minimal access to 
+        clean water? Stemming from this ongoing crisis, BridgeIT was born. Amidst the global pandemic, many remote 
+        communities are being neglected and are in dire need of various medical supplies. At BridgeIT, we strive to 
+        provide a user-friendly platform that allows medical organizations to easily view and support the specific 
+        medical needs of remote communities nearby. </p>
 
       <p>Medical organizations often have a surplus of products that are not used and left until expiration. Instead 
       of leaving these products unused, they can be redirected to people in nearby remote communities. </p>
