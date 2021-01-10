@@ -16,7 +16,7 @@ import Carousel from "../components/Containers/Carousel";
 
 const Home = () => {
 
-  <S2Container><img src={HomeLogoG}/></S2Container>
+  // <S2Container><img src={HomeLogoG}/></S2Container>
 
   const notesList = [
     
@@ -41,6 +41,7 @@ const Home = () => {
   const quickNotes = notesList.map((note) => {
     return (
       <div key={note.caption}>
+        
         <IconWrapper>{note.icon}</IconWrapper>
         <SText size="h3" color="primary" align="center" bold>
           {note.caption}
@@ -75,16 +76,15 @@ const Home = () => {
   });
 
   return (
-    <HomePage>
+    <HomePage >
       
-      <S2Container   color="background">
+      <S2Container   bgColor="background" color="background">
           <img src={HomeLogoG}/>
-          
       </S2Container>
       
       <DivLinks>{quickNotes}</DivLinks>
       
-      <SContainer bgColor="primary" color="background" font-size="20px">
+      <SContainer bgColor="primary" color="background" font-size="20px" >
        
 
       <p>Amidst the global pandemic, many remote communities are being neglected and are in dire need of 
@@ -110,7 +110,7 @@ const Home = () => {
 
 const S2Container = styled(Container)`
   text-align: center;
-  background-image: {HomeLogoG};
+  backgroundImage: url(${HomeLogoG});
   
 `;
 
