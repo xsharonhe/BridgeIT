@@ -4,12 +4,23 @@ import styled from "styled-components";
 import { UserFriends } from "@styled-icons/fa-solid/UserFriends";
 import { HandHoldingMedical } from "@styled-icons/fa-solid/HandHoldingMedical";
 import { Truck } from "@styled-icons/fa-solid/Truck";
+import Puppy from "./puppy image.jpg";
+import HomeLogo from "./homeLogo.jpg";
+import HomeLogoG from "./homeLogo.gif";
+
 
 import { Container, IconWrapper, Text } from "../components";
 import Carousel from "../components/Containers/Carousel";
 
+
+
 const Home = () => {
+
+  <S2Container><img src={HomeLogoG}/></S2Container>
+
   const notesList = [
+    
+    
     {
       caption: "Restart",
       text: "Bringing new hope to remote communities in need of depleting medical supplies",
@@ -42,9 +53,10 @@ const Home = () => {
   });
 
   const faqs = [
-    { ques: "Question 1", ans: "Ans 1" },
-    { ques: "Question 2", ans: "Ans 2" },
-    { ques: "Question 3", ans: "Ans 3" },
+    { ques: "How does it work?", 
+    ans: "BridgeIT connects donors with remote communities based off of their specific needs and what the donors have available. With the integration of Google Maps, it then provides the best pairing results by comparing distances between communities nearby and providing the fastest route to get supplies to those who need it most.  " },
+    { ques: "Why will this help?", ans: "Ans 2" },
+    { ques: "Do we have to deliver the products ourselves?", ans: "Ans 3" },
   ];
 
   const faqsList = faqs.map((faq) => {
@@ -64,9 +76,17 @@ const Home = () => {
 
   return (
     <HomePage>
-      <DivHead>TODO: Main Motto</DivHead>
+      
+      <S2Container   color="background">
+          <img src={HomeLogoG}/>
+          
+      </S2Container>
+      
       <DivLinks>{quickNotes}</DivLinks>
+      
       <SContainer bgColor="primary" color="background" font-size="20px">
+       
+
       <p>Amidst the global pandemic, many remote communities are being neglected and are in dire need of 
       various medical supplies. At BridgeIT, we strive to provide a user-friendly platform that allows 
       medical organizations to easily view and support the specific medical needs of remote communities nearby. </p>
@@ -85,6 +105,14 @@ const Home = () => {
     </HomePage>
   );
 };
+
+
+
+const S2Container = styled(Container)`
+  text-align: center;
+  background-image: {HomeLogoG};
+  
+`;
 
 const SContainer = styled(Container)`
   text-align: center;
