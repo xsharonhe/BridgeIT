@@ -16,7 +16,7 @@ const BorderRouteOptions = ({
     useEffect(() => {
         setBorderOptions([]);
         axios
-            .get(`http://localhost:8000/api/v1/ml/?origins=AnnArbor`)
+            .get(`http://localhost:8000/api/v1/ml/?origins=Albany`)
             .then(res => {
                 setBorderOptions(res.data.smallest);
                 setBiggest(res.data.biggest[0]);
@@ -39,7 +39,7 @@ const BorderRouteOptions = ({
         <Container {...props}>
             <Helmet><title>BridgeIT | Route</title></Helmet>
             <Heading style={{ marginLeft: '50px' }}>Choose a route:</Heading> 
-            <h2 style={{ marginLeft: '50px' }}>From your address in Ann Arbor, Michigan:</h2> 
+            <h2 style={{ marginLeft: '50px' }}>From your address in Albany, New York:</h2> 
             <Wrapper>
                 {!!error ? (
                     <div style={{ width: '200px', height: '200px'}}>

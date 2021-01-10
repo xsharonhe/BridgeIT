@@ -61,7 +61,7 @@ const DashboardDonee = () => {
         })
       let timer = setTimeout(() => {
         setNoError(true);
-      }, 2000);
+      }, 4000);
       return () => clearTimeout(timer);
     }, [userData]);
 
