@@ -51,6 +51,7 @@ const Routes = ({
                     From A (Albany, New York) to E (Wasauksing First Nation Reserve).
                     </Heading>
                     <h2> We are currently on route to your destination. </h2>
+                    <h3> Estimated Time of Delivery: January 11th, 9AM EST</h3>
                     <p> (B): Lansdowne (reached) </p> 
                     <p> (C): Parry Sound (en route) </p> 
                     <p> (D): Oastler Lake Provincial Park (en route) </p> 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import { Redirect, Link } from "react-router-dom";
@@ -15,7 +15,7 @@ import {
 import { signUp } from "../store/actions/authActions";
 import Cookies from "js-cookie";
 
-const SignUp = ({ signUp, isAuthenticated }) => {
+const SignUp = ({ signUp, isAuthenticated, match }) => {
   const [formData, setFormData] = useState({
     group_name: "",
     username: "",
@@ -25,6 +25,13 @@ const SignUp = ({ signUp, isAuthenticated }) => {
     address: "",
     user_type: "",
   });
+  const [donee, setDonee] = useState(false)
+
+  useEffect(() => {
+    if(match.params.id === "donee") {
+        setDonee(true)
+    }
+  }, [])
 
   const [newAccount, setNewAccount] = useState(false);
 
@@ -122,21 +129,46 @@ const SignUp = ({ signUp, isAuthenticated }) => {
           />
           <Text>Please select one: </Text>
           <UserType>
-            <input
-              type="radio"
-              id="donor"
-              name="donor"
-              onChange={(e) => handleRadio(e)}
-            />
-            <label htmlFor="donor">Looking to donate</label>
-            <br />
-            <input
-              type="radio"
-              id="receiver"
-              name="receiver"
-              onChange={(e) => handleRadio(e)}
-            />
-            <label htmlFor="community">Seeking supplies</label>
+            {!!donee ? (
+              <div>
+                <input
+                  type="radio"
+                  id="donor"
+                  name="donor"
+                  onChange={(e) => handleRadio(e)}
+                  checked={false}
+                />
+                <label htmlFor="donor">Looking to donate</label>
+                <br />
+                <input
+                  type="radio"
+                  id="receiver"
+                  name="receiver"
+                  onChange={(e) => handleRadio(e)}
+                  checked
+                />
+                <label htmlFor="community">Seeking supplies</label>
+              </div>
+            ) : (
+              <div>
+                <input
+                  type="radio"
+                  id="donor"
+                  name="donor"
+                  onChange={(e) => handleRadio(e)}
+                  checked
+                />
+                <label htmlFor="donor">Looking to donate</label>
+                <br />
+                <input
+                  type="radio"
+                  id="receiver"
+                  name="receiver"
+                  onChange={(e) => handleRadio(e)}
+                />
+                <label htmlFor="community">Seeking supplies</label>
+              </div>
+            )}
             <br />
           </UserType>
           <FormButton onClick={(e) => handleSubmit(e)}>Sign Up</FormButton>

@@ -10,6 +10,7 @@ import Layout from "./components/Layout/Layout";
 import Home from "./scenes/Home";
 import SignIn from "./scenes/SignIn";
 import SignUp from "./scenes/SignUp";
+import IAM from "./scenes/IAM";
 
 import BorderRouteOptions from "./scenes/BorderRouteOptions";
 import DashboardDonee from "./scenes/DashboardDonee";
@@ -21,7 +22,8 @@ const App = () => {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/signin" component={SignIn} />
-      <Route path="/signup" component={SignUp} />
+      <Route exact path="/signup" component={IAM} />
+      <Route exact path="/signup/:id" component={SignUp} />
       <Route path='/route_options' component={BorderRouteOptions} />
       <Route path="/dashboard/donee" component={DashboardDonee} />
       <Route path="/dashboard/donor" component={DashboardDonar} />
