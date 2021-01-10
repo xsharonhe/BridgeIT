@@ -24,7 +24,7 @@ const App = () => {
       <Route path="/signup" component={SignUp} />
       <Route path='/route_options' component={BorderRouteOptions} />
       <Route path="/dashboard/donee" component={DashboardDonee} />
-      <Route path="/dashboard/donar" component={DashboardDonar} />
+      <Route path="/dashboard/donor" component={DashboardDonar} />
       <Route path="/map/:id" component={Routes} />
     </Switch>
   );
