@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework.response import Response
 from user_profile.models import UserProfile
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect, csrf_exempt
 from django.contrib import auth
 from .serializers import UserSerializer
 from django.utils.decorators import method_decorator
@@ -25,13 +25,12 @@ class CheckAuthenticatedView(APIView):
 
 
 
-@method_decorator(csrf_protect, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
 class SignUpView(APIView):
     permission_classes = (permissions.AllowAny, )
 
     def post(self, request, format=None):
         data = self.request.data
-
         username = data['username']
         password = data['password']
         verify_password = data['verify_password']
@@ -64,7 +63,7 @@ class SignUpView(APIView):
 
 
 
-@method_decorator(csrf_protect, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
 class SignInView(APIView):
     permission_classes = (permissions.AllowAny, )
 
