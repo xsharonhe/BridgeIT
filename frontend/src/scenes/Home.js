@@ -56,8 +56,8 @@ const Home = () => {
   const faqs = [
     { ques: "How does it work?", 
     ans: "BridgeIT connects donors with remote communities based off of their specific needs and what the donors have available. With the integration of Google Maps, it then provides the best pairing results by comparing distances between communities nearby and providing the fastest route to get supplies to those who need it most.  " },
-    { ques: "Why will this help?", ans: "Ans 2" },
-    { ques: "Do we have to deliver the products ourselves?", ans: "Ans 3" },
+    { ques: "Why will this help?", ans: "By providing a platform for remote communities to voice their needs, the matching process done through BridgeIT can repurpose medicines that otherwise would have been left unused. Additionally, it provides members in remote communities a more convenient access to available resources.     " },
+    { ques: "Do we have to deliver the products ourselves?", ans: "YYes, BridgeIT provides donation organizations a suggested route and date of arrival, however, it is up to the organization to decide the delivery details. Our suggested route provides an efficient travel route that reduces travel time which can save donners time and reduce carbon emission." },
   ];
 
   const faqsList = faqs.map((faq) => {
@@ -85,6 +85,7 @@ const Home = () => {
       <DivLinks>{quickNotes}</DivLinks>
       
       <SContainer bgColor="primary" color="background" font-size="20px" >
+       
        
 
       <p>Amidst the global pandemic, many remote communities are being neglected and are in dire need of 
