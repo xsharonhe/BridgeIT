@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Helmet } from 'react-helmet';
 import axios from "axios";
 import Geocode from "react-geocode";
 import {
@@ -120,6 +121,7 @@ const DashboardDonar = () => {
 
     return (
       <DashboardPage>
+        <Helmet><title>BridgeIT | Dashboard</title></Helmet>
         <SContainer>
           <div style={{ marginRight: '30px' }}>
           {!!isLoaded && noError && (

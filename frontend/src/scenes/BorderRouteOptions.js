@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from 'react-helmet';
 import styled from "styled-components";
 import axios from "axios";
 import Select from "react-select";
@@ -38,6 +39,7 @@ const BorderRouteOptions = ({
     }, [selectedValue]);
     return (
         <Container {...props}>
+            <Helmet><title>BridgeIT | Route</title></Helmet>
             <SelectHeader>
                 <StyledSelect
                     onChange={(e) => {

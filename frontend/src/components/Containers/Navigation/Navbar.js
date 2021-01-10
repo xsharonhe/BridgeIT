@@ -2,12 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 import { Brand } from "../../Texts/Brand";
+import { connect } from "react-redux";
+import { signOut } from "../../../store/actions/authActions";
+import Cookies from "js-cookie";
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated, signOut }) => {
+  const handleSignOut = (e) => {
+    const token = Cookies.get("csrftoken");
+    signOut(token);
+  };
+
   const signedIn = [
-    { name: "Dashboard", link: "/" },
+    { name: "Dashboard", link: "/dashboard" },
     { name: "Account", link: "/" },
-    { name: "Sign Out", link: "/" },
+    // { name: "Sign Out", link: "/" },
   ];
   const signedOut = [
     { name: "Home", link: "/" },
@@ -17,7 +25,11 @@ const Navbar = () => {
 
   let links;
 
-  links = signedOut; //TODO: change links on auth status
+  if (isAuthenticated) {
+    links = signedIn;
+  } else {
+    links = signedOut;
+  }
 
   const navbarLinks = links.map((link) => {
     return (
@@ -30,9 +42,18 @@ const Navbar = () => {
   return (
     <NavWrapper>
       <Link to="/">
-        <Brand>Bridge<StyledSpan>IT</StyledSpan></Brand>
+        <Brand>
+          Bridge<StyledSpan>IT</StyledSpan>
+        </Brand>
       </Link>
-      <SUl style={{ float: "right" }}>{navbarLinks}</SUl>
+      <SUl style={{ float: "right" }}>
+        {navbarLinks}
+        {isAuthenticated ? (
+          <NavLink to='#' onClick={handleSignOut}>
+            <SLi>Sign Out</SLi>
+          </NavLink>
+        ) : null}
+      </SUl>
     </NavWrapper>
   );
 };
@@ -44,11 +65,11 @@ const NavWrapper = styled.div`
 `;
 
 const SUl = styled.ul`
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    padding: 9;
-    float: right;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 9;
+  float: right;
 `;
 
 const SLi = styled.li`
@@ -77,4 +98,8 @@ const StyledSpan = styled.span`
     `}
 `;
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { signOut })(Navbar);
