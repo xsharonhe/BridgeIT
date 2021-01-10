@@ -12,9 +12,9 @@ import {
   FormText,
   FormButton,
 } from "../components/Containers/FormStyles";
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie';
 
-const SignIn = ({ signIn, isAuthenticated, userType }) => {
+const SignIn = ({ signIn, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -34,10 +34,17 @@ const SignIn = ({ signIn, isAuthenticated, userType }) => {
     const token = Cookies.get('csrftoken');
     signIn(username, password, token);
   };
+  console.log(isAuthenticated)
 
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  } else {
+    if(username === "wasauksing") {
+      return <Redirect to="/dashboard/donee" />;
+    } else if (username === "bridgeit") {
+      return <Redirect to="dashboard/donor" />
+    }
+    return <Redirect to="dashboard/donor" />
+  }
+    else {
     return (
       <FormPage>
         <Helmet>
@@ -82,7 +89,6 @@ const SignIn = ({ signIn, isAuthenticated, userType }) => {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  userType: state.profile.user_type,
 });
 
 export default connect(mapStateToProps, { signIn })(SignIn);

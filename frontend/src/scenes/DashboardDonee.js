@@ -18,6 +18,7 @@ import {
   FormText,
   FormButton,
 } from "../components/Containers/FormStyles";
+import { set } from "js-cookie";
 
 const center = {
   lat: 43.651070, 
@@ -31,7 +32,26 @@ const DashboardDonee = () => {
     })
     const [donations, setDonations] = useState([{}]);
     const [selectedDonation, setSelectedDonation] = useState(null);
-    const [points, setPoints] = useState([])
+    const [points, setPoints] = useState([
+      {
+        lat: 43.657230, lng: -79.387733
+      },
+      {
+        lat: 43.257931, lng: -79.917068
+      },
+      {
+        lat: 45.429610, lng: -75.640430
+      },
+      {
+        lat: 45.326310, lng: -80.059970
+      },
+      {
+        lat: 45.326310, lng: -80.059970
+      },
+      {
+        lat: 45.298353, lng: -79.904513
+      }
+    ])
     const [noError, setNoError] = useState(false);
 
     useEffect(() => {
@@ -42,35 +62,51 @@ const DashboardDonee = () => {
       axios
         .get('http://localhost:8000/api/v1/items/donations')
         .then(res => {
-          const don = res.data;
-          for(let i=0; i < don.length; i++) {
-            Geocode.fromAddress(don[i].location).then(
-              response => {
-                const { lat, lng } = response.results[0].geometry.location;
-                setPoints(points => [...points, { lat: lat, lng: lng }])
-              },
-              error => {
-                console.error(error);
-              }
-            )
-          }
-          setDonations(don);
+          // const don = res.data;
+          // console.log()
+          // console.log(don)
+          // for(let i=0; i < don.length; i++) {
+          //     const loc = don.location[i]
+          //     console.log(loc)
+          //     // let obj = {
+          //       // lat: location[i],
+          //       // lng: lng
+          //     // }
+          //     // setPoints(points => [...points, obj])
+          // }
+          // // const q = don.split(",");
+          // // console.log(q)
+          // // for(let i=0; i < don.length; i++) {
+          //   // Geocode.fromAddress(don[i].location).then(
+          //   //   response => {
+          //   //     const { lat, lng } = response.results[0].geometry.location;
+          //   //     setPoints(points => [...points, { lat: lat, lng: lng }])
+          //   //   },
+          //   //   error => {
+          //   //     console.error(error);
+          //   //   }
+          //   // )
+          // // }
+          // console.log(don);
+          // setDonations(don);
         })
         .catch(err => {
           console.log(err)
         })
       let timer = setTimeout(() => {
         setNoError(true);
-      }, 4000);
+      }, 1000);
       return () => clearTimeout(timer);
     }, [userData]);
 
   const handleChange = (e) => {
     e.preventDefault();
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+    // this.setState({
+    //   [e.target.name]: e.target.value,
+    // });
   };
+
+  console.log(points)
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -128,13 +164,13 @@ const DashboardDonee = () => {
               center={center}
               zoom={5.5}
             > 
-            {donations.map((donation, i) => (
+            {points.map((point, i) => (
               <Marker 
-                key={donation.location}
-                position={{ lat: parseFloat(points[i].lat), lng: parseFloat(points[i].lng) }}
-                onClick={() => setSelectedDonation(donation)}
+                key={`${point.lat}`}
+                position={{ lat: parseFloat(point.lat), lng: parseFloat(point.lng) }}
               />
             ))}
+        
             </GoogleMap>
           )}
         </div>
