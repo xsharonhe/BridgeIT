@@ -1,5 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { connect } from "react-redux";
+import { signIn } from "../store/actions/authActions";
 import { Text, Input } from "../components";
 import {
   FormPage,
@@ -9,35 +12,38 @@ import {
   FormText,
   FormButton,
 } from "../components/Containers/FormStyles";
+import Cookies from 'js-cookie';
 
-class SignIn extends React.Component {
-  state = {
+const SignIn = ({ signIn, isAuthenticated }) => {
+  const [formData, setFormData] = useState({
     username: "",
     password: "",
-  };
+  });
 
-  handleChange = (e) => {
-    e.preventDefault();
-    this.setState({
+  const { username, password } = formData;
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  handleClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (this.state.username === "" || this.state.password === "") {
-      console.log("one of the input fields is empty");
-      alert("Please recheck your credentials.");
-    } else {
-      console.log(this.state.username, this.state.password);
-      console.log("sign in button clicked");
-    }
+    const token = Cookies.get('csrftoken');
+    signIn(username, password, token);
   };
+  console.log(isAuthenticated)
 
-  render() {
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  } else {
     return (
       <FormPage>
+        <Helmet>
+          <title>BridgeIT | Sign In</title>
+        </Helmet>
         <FormWrapper>
           <FormText>Sign In</FormText>
           <SForm>
@@ -46,8 +52,8 @@ class SignIn extends React.Component {
               type="text"
               align="center"
               placeholder="Username"
-              value={this.state.username}
-              onChange={this.handleChange}
+              value={username}
+              onChange={(e) => handleChange(e)}
               style={{ width: "85%", marginBottom: "8%" }}
               required
             />
@@ -56,12 +62,12 @@ class SignIn extends React.Component {
               type="password"
               align="center"
               placeholder="Password"
-              value={this.state.password}
-              onChange={this.handleChange}
+              value={password}
+              onChange={(e) => handleChange(e)}
               style={{ width: "85%", marginBottom: "8%" }}
               required
             />
-            <FormButton onClick={this.handleClick}>Sign In</FormButton>
+            <FormButton onClick={(e) => handleSubmit(e)}>Sign In</FormButton>
             <Text align="center" style={{ paddingTop: "5%" }}>
               Don't have an account?{" "}
               <Link to="/signup">
@@ -73,6 +79,10 @@ class SignIn extends React.Component {
       </FormPage>
     );
   }
-}
+};
 
-export default SignIn;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { signIn })(SignIn);

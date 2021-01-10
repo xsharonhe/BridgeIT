@@ -1,16 +1,10 @@
-import { combineReducers } from 'redux';
-// import authReducer from './authReducer';
+import { combineReducers } from "redux";
+import profileReducer from "./profileReducer";
+import authReducer from "./authReducer";
 
-// export default combineReducers({
-//     auth: authReducer,
-// });
-
-const initState = {
-    items: []
-}
-
-const rootReducer = (state = initState, action) => {
-    return state;
-}
+const rootReducer = combineReducers({
+  auth: authReducer,
+  profile: profileReducer,
+});
 
 export default rootReducer;

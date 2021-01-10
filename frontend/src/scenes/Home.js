@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Helmet } from 'react-helmet';
 
 import { UserFriends } from "@styled-icons/fa-solid/UserFriends";
 import { HandHoldingMedical } from "@styled-icons/fa-solid/HandHoldingMedical";
@@ -60,6 +61,7 @@ const Home = () => {
 
   return (
     <HomePage>
+      <Helmet><title>BridgeIT | Home</title></Helmet>
       <DivHead>TODO: Main Motto</DivHead>
       <DivLinks>{quickNotes}</DivLinks>
       <Container bgColor="primary" color="background">

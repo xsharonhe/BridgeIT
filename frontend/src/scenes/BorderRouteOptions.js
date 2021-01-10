@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from 'react-helmet';
 import styled from "styled-components";
 import axios from "axios";
 
@@ -27,6 +28,7 @@ const BorderRouteOptions = ({
     }, []);
     return (
         <Container {...props}>
+            <Helmet><title>BridgeIT | Route</title></Helmet>
             <Wrapper>
                 {!!error ? <div> Data is fetching...</div>
                     : 
